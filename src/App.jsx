@@ -2,7 +2,7 @@ import React from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter } from "react-router-dom";
 
-import ErrorBoundary from "@/components/errorBoundary/errorBoundary";
+import ErrorBoundary from "@/components/errorBoundary";
 import { AuthProvider } from "@/hooks/useAuth";
 import Layouts from "@/layouts";
 import history from "@/utils/history";

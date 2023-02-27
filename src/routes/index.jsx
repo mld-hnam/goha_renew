@@ -1,5 +1,6 @@
 import React from "react";
 import { Routes as RouterRoutes, Route, Navigate } from "react-router-dom";
+
 import { protectedRoutes, publicRoutes } from "@/configs/routeConfig";
 import ProtectedRoute from "./protectedRoute";
 import PublicRoute from "./publicRoute";
@@ -15,7 +16,6 @@ function RootRoutes() {
             <Route key={key + index} path={path} element={<Component />} />
           );
         })}
-
         <Route path="*" element={<Navigate to="/" replace />} />
       </Route>
 

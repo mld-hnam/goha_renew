@@ -5,7 +5,7 @@ const usersNavtree = [
     key: "users",
     path: `/users`,
     title: "Users",
-    icon: <TeamOutlined />,
+    icon: TeamOutlined,
     breadcrumb: false,
     isGroupTitle: true,
     submenu: [
@@ -21,6 +21,6 @@ const usersNavtree = [
   },
 ];
 
-const navigationConfig = [...usersNavtree];
+const navConfig = [...usersNavtree];
 
-export default navigationConfig;
+export default navConfig;

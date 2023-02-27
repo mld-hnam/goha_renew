@@ -2,9 +2,9 @@ import React, { Suspense } from "react";
 import { useLocation } from "react-router-dom";
 import { Layout } from "antd";
 
-import SideNav from "components/layout-components/SideNav";
+import SideNav from "@/components/sideNav";
 import Footer from "@/components/footer";
-import navigationConfig from "configs/NavigationConfig";
+import navConfig from "@/configs/navConfig";
 
 import getRouteInfo from "@/utils/getRouteInfo";
 import PageHeader from "@/components/pageHeader";
@@ -16,7 +16,7 @@ const { Content } = Layout;
 export const AppLayout = ({ children }) => {
   const location = useLocation();
 
-  const currentRouteInfo = getRouteInfo(navigationConfig, location.pathname);
+  const currentRouteInfo = getRouteInfo(navConfig, location.pathname);
 
   return (
     <Layout>
