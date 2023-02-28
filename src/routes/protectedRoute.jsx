@@ -6,11 +6,13 @@ const ProtectedRoute = () => {
   const { isAuthenticated } = useAuth();
   const location = useLocation();
   if (!isAuthenticated) {
-    return (
-      <Navigate to={`/auth/login?redirect=${location.pathname}`} replace />
-    );
+    return <Navigate to={`/login?redirect=${location.pathname}`} replace />;
   }
-  return <Outlet />;
+  return (
+    <div>
+      <Outlet />
+    </div>
+  );
 };
 
 export default ProtectedRoute;

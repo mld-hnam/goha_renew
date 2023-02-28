@@ -20,7 +20,7 @@ export const AppLayout = ({ children }) => {
 
   return (
     <Layout>
-      <HeaderNav />
+      {/* <HeaderNav />
       <Layout className="app-container">
         <SideNav routeInfo={currentRouteInfo} />
         <Layout className="app-layout">
@@ -37,7 +37,8 @@ export const AppLayout = ({ children }) => {
           </div>
           <Footer />
         </Layout>
-      </Layout>
+      </Layout> */}
+      {children}
     </Layout>
   );
 };

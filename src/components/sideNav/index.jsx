@@ -67,7 +67,7 @@ const SideNavContent = (props) => {
 export const SideNav = ({ props }) => {
   return (
     <Sider className={`side-nav`}>
-      <Scrollbars autoHide>
+      <Scrollbars>
         <SideNavContent {...props} />
       </Scrollbars>
     </Sider>

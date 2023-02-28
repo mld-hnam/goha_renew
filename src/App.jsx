@@ -1,11 +1,9 @@
 import React from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { BrowserRouter } from "react-router-dom";
 
 import ErrorBoundary from "@/components/errorBoundary";
 import { AuthProvider } from "@/hooks/useAuth";
 import Layouts from "@/layouts";
-import history from "@/utils/history";
 import RootRoutes from "@/routes";
 
 const queryClient = new QueryClient({
@@ -22,17 +20,15 @@ const queryClient = new QueryClient({
 
 function App() {
   return (
-    <BrowserRouter history={history}>
-      <QueryClientProvider client={queryClient}>
-        <AuthProvider>
-          <ErrorBoundary>
-            <Layouts>
-              <RootRoutes />
-            </Layouts>
-          </ErrorBoundary>
-        </AuthProvider>
-      </QueryClientProvider>
-    </BrowserRouter>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <ErrorBoundary>
+          <Layouts>
+            <RootRoutes />
+          </Layouts>
+        </ErrorBoundary>
+      </AuthProvider>
+    </QueryClientProvider>
   );
 }
 
