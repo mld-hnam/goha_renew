@@ -1,3 +1,3 @@
 import { env } from "./envConfig";
 
-export const API_BASE_URL = env.REACT_APP_API;
+export const API_BASE_URL = env.API_ENDPOINT_URL;

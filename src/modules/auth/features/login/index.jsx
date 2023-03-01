@@ -2,14 +2,27 @@ import React from "react";
 import { Button, Form, Input } from "antd";
 import { MailOutlined, LockOutlined } from "@ant-design/icons";
 import { useAuthLogin } from "../../services";
+import { API_BASE_URL } from "@/configs/appConfig";
 
 export default function Login() {
-  const { mutate: login, isLoading } = useAuthLogin();
-  const onLogin = (values) => {
-    login(values);
+  const { mutate: login, isLoading } = useAuthLogin({});
+  const [form] = Form.useForm();
+
+  const onLogin = async () => {
+    try {
+      const values = await form.validateFields();
+      console.log(values);
+      console.log(API_BASE_URL);
+      login(values, {
+        onSuccess: (res) => {
+          login(res);
+        },
+      });
+    } catch (error) {}
   };
+
   return (
-    <Form layout="vertical" name="login-form" onFinish={onLogin}>
+    <Form form={form} layout="vertical" name="login-form">
       <Form.Item
         name="email"
         label="Email"
@@ -39,7 +52,13 @@ export default function Login() {
         <Input.Password prefix={<LockOutlined className="text-primary" />} />
       </Form.Item>
       <Form.Item>
-        <Button type="primary" htmlType="submit" block loading={isLoading}>
+        <Button
+          type="primary"
+          htmlType="submit"
+          onClick={onLogin}
+          block
+          loading={isLoading}
+        >
           Sign In
         </Button>
       </Form.Item>

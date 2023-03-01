@@ -1,5 +1,5 @@
 const dev = {
-  API_ENDPOINT_URL: "localhost:3000/v1/",
+  API_ENDPOINT_URL: "https://goha-api.vercel.app/v1/",
 };
 
 const prod = {
@@ -11,6 +11,7 @@ const test = {
 };
 
 const getEnv = () => {
+  console.log(process.env.NODE_ENV);
   switch (process.env.NODE_ENV) {
     case "development":
       return dev;

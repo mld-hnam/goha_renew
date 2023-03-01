@@ -1,7 +1,6 @@
 import axios from "axios";
 import qs from "qs";
 
-import { createError } from "@/components/Error";
 import history from "@/utils/history";
 import { API_BASE_URL } from "@/configs/appConfig";
 import { getToken, removeToken } from "./account";
@@ -20,6 +19,7 @@ const request = axios.create({
 export function createRequestInterceptor() {
   return function interceptor(config) {
     config.baseURL = API_BASE_URL;
+
     const baseConfig = {
       ...config,
       headers: {
@@ -79,7 +79,7 @@ export function getErrorDetails(error) {
     const { response } = error;
     errorMessage = response && response.data && response.data.message;
   }
-  return createError(errorCode, errorMessage);
+  return `${errorCode} ${errorMessage}`;
 }
 /**
  * Check if the error is unauthorized error.
