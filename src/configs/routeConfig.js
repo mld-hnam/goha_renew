@@ -23,4 +23,9 @@ export const protectedRoutes = [
       import("@/modules/dashboard/features/dashboard")
     ),
   },
+  {
+    key: "users",
+    path: `/users`,
+    component: React.lazy(() => import("@/modules/users/features/listUser")),
+  },
 ];

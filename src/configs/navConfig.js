@@ -1,4 +1,4 @@
-import { TeamOutlined } from "@ant-design/icons";
+import { TeamOutlined, UserSwitchOutlined } from "@ant-design/icons";
 
 const usersNavtree = [
   {
@@ -11,9 +11,17 @@ const usersNavtree = [
     submenu: [
       {
         key: "users",
-        path: `/`,
+        path: `/users`,
         title: "Users",
         icon: TeamOutlined,
+        breadcrumb: false,
+        submenu: [],
+      },
+      {
+        key: "agency",
+        path: `/users/agency`,
+        title: "Agency",
+        icon: UserSwitchOutlined,
         breadcrumb: false,
         submenu: [],
       },
