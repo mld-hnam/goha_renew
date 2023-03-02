@@ -1,7 +1,6 @@
 import React from "react";
 import { Button } from "antd";
 import { ErrorBoundary as ReactErrorBoundary } from "react-error-boundary";
-import { Link } from "react-router-dom";
 
 function ErrorFallback() {
   return (
@@ -13,9 +12,14 @@ function ErrorFallback() {
             <h1 className="font-weight-bold mb-4">
               Sorry, something goes wrong
             </h1>
-            <Link to="/">
-              <Button type="primary">Back to Home</Button>
-            </Link>
+            <Button
+              onClick={() => {
+                window.location.href = "/";
+              }}
+              type="primary"
+            >
+              Back to Home
+            </Button>
           </div>
         </div>
         <div className="text-center">

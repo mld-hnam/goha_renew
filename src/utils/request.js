@@ -1,16 +1,16 @@
 import axios from "axios";
-import qs from "qs";
+import { parse, stringify } from "qs";
 
 import history from "@/utils/history";
 import { API_BASE_URL } from "@/configs/appConfig";
 import { getToken, removeToken } from "./account";
 import { displayErrorMessage } from "./message";
 
-const paramsSerializer = (params) =>
-  qs.stringify(params, { arrayFormat: "repeat" });
-
 const request = axios.create({
-  paramsSerializer,
+  paramsSerializer: {
+    encode: parse,
+    serialize: stringify,
+  },
 });
 
 /**
@@ -19,19 +19,13 @@ const request = axios.create({
 export function createRequestInterceptor() {
   return function interceptor(config) {
     config.baseURL = API_BASE_URL;
-
-    const baseConfig = {
+    return {
       ...config,
       headers: {
-        ...config.headers,
+        Accept: "application/json",
         "x-envoy-upstream-rq-timeout-ms": 30000,
         Authorization: `Bearer ${getToken()}`,
       },
-    };
-
-    return {
-      ...config,
-      headers: baseConfig,
     };
   };
 }
@@ -72,14 +66,15 @@ export function isServerError({ response: { status } }) {
 export function getErrorDetails(error) {
   let errorCode;
   let errorMessage;
-
+  console.log(error);
   if (typeof error === "string") {
     errorCode = error;
   } else {
     const { response } = error;
     errorMessage = response && response.data && response.data.message;
+    errorCode = error.code;
   }
-  return `${errorCode} ${errorMessage}`;
+  return `${errorCode}: ${errorMessage}`;
 }
 /**
  * Check if the error is unauthorized error.
@@ -102,12 +97,6 @@ export function isResponseError({ response }) {
 }
 export function createHandlerChain(handlers = []) {
   return function handlerChain(error) {
-    const {
-      config: { useDefaultErrorHandler = true },
-    } = error;
-    if (!useDefaultErrorHandler) {
-      return Promise.reject(error);
-    }
     const stack = [...handlers];
     function next() {
       if (stack.length === 0) {
@@ -137,7 +126,7 @@ export async function unauthorizedErrorHandler(error, next) {
     /**
      * TODO: Handle refresh token
      */
-    errorMessage(getErrorDetails("401"));
+    errorMessage(getErrorDetails(error));
     removeToken();
     return;
   }
@@ -147,7 +136,7 @@ export function requestErrorHandler(error, next) {
   if (!isRequestError(error)) {
     return next();
   }
-  errorMessage(getErrorDetails("request.failed"));
+  errorMessage(getErrorDetails("request failed"));
 }
 export function otherErrorHandler(error, next) {
   if (
@@ -157,7 +146,7 @@ export function otherErrorHandler(error, next) {
   ) {
     return next();
   }
-  errorMessage(getErrorDetails("request.failed"));
+  errorMessage(getErrorDetails("request failed"));
 }
 
 function maintenanceHandler(error, next) {

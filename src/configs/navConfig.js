@@ -4,7 +4,7 @@ const usersNavtree = [
   {
     key: "users",
     path: `/users`,
-    title: "Users",
+    title: "User Management",
     icon: TeamOutlined,
     breadcrumb: false,
     isGroupTitle: true,
@@ -12,7 +12,7 @@ const usersNavtree = [
       {
         key: "users",
         path: `/`,
-        title: "User Management",
+        title: "Users",
         icon: TeamOutlined,
         breadcrumb: false,
         submenu: [],

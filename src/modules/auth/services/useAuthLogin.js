@@ -5,11 +5,14 @@ import request from "@/utils/request";
  * @param {Credentials} options
  */
 const useAuthLogin = (options) =>
-  useMutation(async (data) => request.post("/auth/login", data), {
-    ...options,
-    onSuccess: (r) => {
-      options && options.onSuccess(r);
-    },
-  });
-
+  useMutation(
+    async ({ email, password }) =>
+      request.post("/auth/login", { email, password }),
+    {
+      ...options,
+      onSuccess: (r, ...rest) => {
+        options && options.onSuccess(r, ...rest);
+      },
+    }
+  );
 export default useAuthLogin;

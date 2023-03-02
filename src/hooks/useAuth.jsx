@@ -48,7 +48,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const handleUpdateUser = useCallback(async (user) => {
-    setUser(JSON.parse(user));
+    setUser(user);
     await updateUserStorage(user);
   }, []);
 
@@ -75,7 +75,7 @@ export const AuthProvider = ({ children }) => {
   const contextValue = useMemo(
     () => ({
       isAuthenticated: !!token,
-      profile: user,
+      profile: JSON.parse(user),
       logout: handleLogout,
       updateToken: handleUpdateToken,
       updateUser: handleUpdateUser,

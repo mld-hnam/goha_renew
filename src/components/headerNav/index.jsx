@@ -8,10 +8,12 @@ import Icon from "@ant-design/icons/lib/components/Icon";
 const { Header } = Layout;
 
 const MenuItem = (props) => (
-  <a className="d-flex align-items-center" href={props.path}>
-    <Icon className="font-size-md" type={props.icon} />
-    <span className="font-weight-normal mx-2">{props.label}</span>
-  </a>
+  <div>
+    <a className="d-flex align-items-center" href={props.path}>
+      <Icon className="font-size-md" type={props.icon} />
+      <span className="font-weight-normal mx-2">{props.label}</span>
+    </a>
+  </div>
 );
 
 const MenuItemSignOut = (props) => (
@@ -22,8 +24,7 @@ const MenuItemSignOut = (props) => (
 );
 
 export const HeaderNav = () => {
-  const { logout, user } = useAuth;
-
+  const { logout, profile } = useAuth();
   const handleClick = ({ key }) => {
     if (key === "Sign Out") {
       logout();
@@ -36,9 +37,7 @@ export const HeaderNav = () => {
       items={[
         {
           key: "Account Setting",
-          label: (
-            <MenuItem path="/" label="Account Setting" icon={SettingOutlined} />
-          ),
+          label: <MenuItem label="Account Setting" icon={SettingOutlined} />,
         },
         {
           key: "Sign Out",
@@ -52,7 +51,7 @@ export const HeaderNav = () => {
     <Header className={`app-header`}>
       <div className={`app-header-wrapper layout-top-nav`}>
         <div className="logo">
-          <img src={`/img/logo-white.png`} alt={`logo`} />
+          <img src={`/img/logo.png`} alt={`logo`} />
         </div>
         <div className="nav" style={{ width: `calc(100% - 250px` }}>
           <div className="nav-right">
@@ -63,12 +62,12 @@ export const HeaderNav = () => {
             >
               <div className="nav-item">
                 <div className="d-flex align-items-center">
-                  <Avatar src="/img/avatars/thumb-1.jpg" />
+                  <Avatar src="/img/avatars/thumb-2.jpg" />
                   <div className="pl-2 d-none d-sm-block profile-text">
                     <div className="font-size-base font-weight-bold">
-                      {user.name}
+                      {profile?.name}
                     </div>
-                    <span className="opacity-0-8">{user.email}</span>
+                    <span className="opacity-0-8">{profile?.email}</span>
                   </div>
                 </div>
               </div>

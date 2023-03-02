@@ -17,10 +17,9 @@ export const AppLayout = ({ children }) => {
   const location = useLocation();
 
   const currentRouteInfo = getRouteInfo(navConfig, location.pathname);
-
   return (
     <Layout>
-      {/* <HeaderNav />
+      <HeaderNav />
       <Layout className="app-container">
         <SideNav routeInfo={currentRouteInfo} />
         <Layout className="app-layout">
@@ -37,8 +36,7 @@ export const AppLayout = ({ children }) => {
           </div>
           <Footer />
         </Layout>
-      </Layout> */}
-      {children}
+      </Layout>
     </Layout>
   );
 };

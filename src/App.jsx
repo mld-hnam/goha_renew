@@ -9,25 +9,22 @@ import RootRoutes from "@/routes";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      retry: 0,
       refetchOnWindowFocus: false,
     },
-    mutations: {
-      /**Todo: option mutations */
-    },
+    mutations: {},
   },
 });
 
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <ErrorBoundary>
+      <ErrorBoundary>
+        <AuthProvider>
           <Layouts>
             <RootRoutes />
           </Layouts>
-        </ErrorBoundary>
-      </AuthProvider>
+        </AuthProvider>
+      </ErrorBoundary>
     </QueryClientProvider>
   );
 }

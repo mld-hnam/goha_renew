@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 import { Scrollbars } from "react-custom-scrollbars-2";
 import navConfig from "@/configs/navConfig";
+import Icon from "@/components/icon";
 
 const { Sider } = Layout;
 
@@ -24,7 +25,7 @@ const setDefaultOpen = (key) => {
 const MenuItem = ({ title, icon, path }) => {
   return (
     <>
-      {icon}
+      {icon && <Icon type={icon} />}
       <span>{title}</span>
       {path && <Link to={path} />}
     </>
