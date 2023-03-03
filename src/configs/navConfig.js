@@ -6,7 +6,7 @@ const usersNavtree = [
     path: `/users`,
     title: "User Management",
     icon: TeamOutlined,
-    breadcrumb: false,
+    breadcrumb: true,
     isGroupTitle: true,
     submenu: [
       {
@@ -22,7 +22,7 @@ const usersNavtree = [
         path: `/users/agency`,
         title: "Agency",
         icon: UserSwitchOutlined,
-        breadcrumb: false,
+        breadcrumb: true,
         submenu: [],
       },
     ],

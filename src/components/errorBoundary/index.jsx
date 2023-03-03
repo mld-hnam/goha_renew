@@ -8,7 +8,9 @@ function ErrorFallback() {
       <div className="container-fluid d-flex flex-column justify-content-between h-100 px-md-4 pb-md-4 pt-md-1">
         <div className="container">
           <div className="text-center mb-5">
-            <img className="img-fluid" src="/img/others/img-21.png" alt="" />
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <img className="img-fluid" src="/img/others/img-21.png" alt="" />
+            </div>
             <h1 className="font-weight-bold mb-4">
               Sorry, something goes wrong
             </h1>

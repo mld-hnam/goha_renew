@@ -38,6 +38,7 @@ const BreadcrumbRoute = () => {
 };
 
 const PageHeader = ({ title, display }) => {
+  console.log({ title, display });
   return display ? (
     <div className="app-page-header">
       <h3 className="mb-0 mr-3 font-weight-semibold">

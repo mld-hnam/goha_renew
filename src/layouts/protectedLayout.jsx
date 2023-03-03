@@ -10,6 +10,7 @@ import getRouteInfo from "@/utils/getRouteInfo";
 import PageHeader from "@/components/pageHeader";
 import HeaderNav from "@/components/headerNav";
 import Loading from "@/components/loading";
+import { ModalManager } from "@/hooks/useModal";
 
 const { Content } = Layout;
 
@@ -17,6 +18,7 @@ export const AppLayout = ({ children }) => {
   const location = useLocation();
 
   const currentRouteInfo = getRouteInfo(navConfig, location.pathname);
+  console.log(currentRouteInfo);
   return (
     <Layout>
       <HeaderNav />
@@ -30,7 +32,7 @@ export const AppLayout = ({ children }) => {
             />
             <Content>
               <Suspense fallback={<Loading cover="content" />}>
-                {children}
+                <ModalManager>{children}</ModalManager>
               </Suspense>
             </Content>
           </div>
