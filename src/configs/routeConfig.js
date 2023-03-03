@@ -28,4 +28,14 @@ export const protectedRoutes = [
     path: `/users`,
     component: React.lazy(() => import("@/modules/users/features/listUser")),
   },
+  {
+    key: "addUser",
+    path: `/users/add`,
+    component: React.lazy(() => import("@/modules/users/features/addUser")),
+  },
+  {
+    key: "editUser",
+    path: `/users/:userId`,
+    component: React.lazy(() => import("@/modules/users/features/editUser")),
+  },
 ];

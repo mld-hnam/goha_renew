@@ -22,7 +22,7 @@ const UserActions = ({ record }) => {
   };
 
   const onEdit = (id) => {
-    navigate(`/user/${id}`);
+    navigate(`/users/${id}`);
   };
 
   const onViewOrderUser = (id) => {

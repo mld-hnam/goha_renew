@@ -1,4 +1,4 @@
-import { Card } from "antd";
+import { Button, Card } from "antd";
 import React from "react";
 import moment from "moment";
 import TableUser from "@/modules/users/components/tableUser";
@@ -7,6 +7,8 @@ import useGetUsers from "../../services/useGetUsers";
 import { UserRole } from "../../components/labelUserRole";
 import UserActions from "../../components/userAction";
 import FilterListUser from "../../components/filterListUser";
+import { useNavigate } from "react-router-dom";
+import { PlusCircleOutlined } from "@ant-design/icons";
 
 const columns = [
   {
@@ -39,6 +41,7 @@ const columns = [
 ];
 
 export default function ListUser() {
+  const navigate = useNavigate();
   const [{ page, limit, sortBy, filters }, setSearchParams] =
     useReflectionSearchParams({
       page: 0,
@@ -69,8 +72,20 @@ export default function ListUser() {
 
   return (
     <Card bodyStyle={{ padding: "0px" }}>
-      <div className="flex p-3">
+      <div className="flex p-3 justify-between">
         <FilterListUser filters={filters} onChange={changeFilter} />
+        <div className="flex justify-between">
+          <Button
+            onClick={() => {
+              navigate(`/users/add`);
+            }}
+            type="primary"
+            icon={<PlusCircleOutlined />}
+            block
+          >
+            Add user
+          </Button>
+        </div>
       </div>
       <div className="table-responsive">
         <TableUser
