@@ -6,6 +6,7 @@ import useReflectionSearchParams from "@/hooks/useReflectionSearchParams";
 import useGetUsers from "../../services/useGetUsers";
 import { UserRole } from "../../components/labelUserRole";
 import UserActions from "../../components/userAction";
+import FilterListUser from "../../components/filterListUser";
 
 const columns = [
   {
@@ -68,6 +69,9 @@ export default function ListUser() {
 
   return (
     <Card bodyStyle={{ padding: "0px" }}>
+      <div className="flex p-3">
+        <FilterListUser filters={filters} onChange={changeFilter} />
+      </div>
       <div className="table-responsive">
         <TableUser
           tableColumns={columns}

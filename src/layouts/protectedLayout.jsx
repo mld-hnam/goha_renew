@@ -24,7 +24,7 @@ export const AppLayout = ({ children }) => {
       <HeaderNav />
       <Layout className="app-container">
         <SideNav routeInfo={currentRouteInfo} />
-        <Layout className="app-layout">
+        <Layout className="app-layout" style={{ paddingLeft: 250 }}>
           <div className={`app-content`}>
             <PageHeader
               display={currentRouteInfo?.breadcrumb}

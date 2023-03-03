@@ -67,7 +67,7 @@ const SideNavContent = (props) => {
 
 export const SideNav = ({ props }) => {
   return (
-    <Sider className={`side-nav`}>
+    <Sider width={250} className={`side-nav`}>
       <Scrollbars>
         <SideNavContent {...props} />
       </Scrollbars>

@@ -49,7 +49,7 @@ export const HeaderNav = () => {
 
   return (
     <Header className={`app-header`}>
-      <div className={`app-header-wrapper layout-top-nav justify-between`}>
+      <div className={`app-header-wrapper justify-between`}>
         <div className="logo">
           <img src={`/img/logo.png`} alt={`logo`} />
         </div>
