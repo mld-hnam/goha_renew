@@ -1,10 +1,10 @@
 import React from "react";
-import { Button, Form, Input } from "antd";
+import { Button, Card, Form, Input } from "antd";
 
 import { MailOutlined, LockOutlined } from "@ant-design/icons";
 
 import { useAuthLogin } from "../../services";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 
 export default function Login() {
@@ -27,8 +27,11 @@ export default function Login() {
   };
 
   return (
-    <>
+    <Card>
       <h1>Sign In</h1>
+      <p>
+        Do you want check order ? <Link to="/tracking">Tracking page</Link>
+      </p>
       <Form form={form} layout="vertical" name="login-form">
         <Form.Item
           name="email"
@@ -70,6 +73,6 @@ export default function Login() {
           </Button>
         </Form.Item>
       </Form>
-    </>
+    </Card>
   );
 }

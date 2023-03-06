@@ -35,7 +35,17 @@ export const protectedRoutes = [
   },
   {
     key: "editUser",
-    path: `/users/:userId`,
+    path: `/users/edit/:userId`,
     component: React.lazy(() => import("@/modules/users/features/editUser")),
+  },
+  {
+    key: "agency",
+    path: `/users/agency`,
+    component: React.lazy(() => import("@/modules/users/features/agency")),
+  },
+  {
+    key: "orders",
+    path: `/orders`,
+    component: React.lazy(() => import("@/modules/order/features/listOrder")),
   },
 ];

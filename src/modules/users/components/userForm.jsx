@@ -1,7 +1,13 @@
 import React from "react";
 import { Card, Col, Form, Input, Row, Select } from "antd";
 
-export default function UserForm({ form, initialValues = {}, onSubmit }) {
+export default function UserForm({
+  form,
+  initialValues = {},
+  onSubmit,
+  mode = "ADD",
+  isLoading,
+}) {
   return (
     <Form
       layout="vertical"
@@ -13,7 +19,7 @@ export default function UserForm({ form, initialValues = {}, onSubmit }) {
     >
       <Row>
         <Col span={18} offset={3}>
-          <Card>
+          <Card loading={isLoading}>
             <Row gutter={16}>
               <Col xs={24} sm={24} md={12}>
                 <Form.Item
@@ -82,7 +88,7 @@ export default function UserForm({ form, initialValues = {}, onSubmit }) {
                   name="password"
                   rules={[
                     {
-                      required: true,
+                      required: mode === "ADD" ? true : false,
                       message: "Please enter your Password",
                     },
                     {
@@ -90,8 +96,7 @@ export default function UserForm({ form, initialValues = {}, onSubmit }) {
                       message: "Password min 8 characters",
                     },
                     {
-                      pattern:
-                        /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$/,
+                      pattern: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/,
                       message: `Password must contain at least 1 letter and 1 number`,
                     },
                   ]}
@@ -105,7 +110,7 @@ export default function UserForm({ form, initialValues = {}, onSubmit }) {
                   name="confirmPassword"
                   rules={[
                     {
-                      required: true,
+                      required: mode === "ADD" ? true : false,
                       message: "Please confirm your Password",
                     },
                     ({ getFieldValue }) => ({

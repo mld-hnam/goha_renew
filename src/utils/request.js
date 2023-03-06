@@ -65,8 +65,7 @@ export function isServerError({ response: { status } }) {
  */
 export function getErrorDetails(error) {
   let errorCode;
-  let errorMessage;
-  console.log(error);
+  let errorMessage = "";
   if (typeof error === "string") {
     errorCode = error;
   } else {

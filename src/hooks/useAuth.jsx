@@ -59,6 +59,18 @@ export const AuthProvider = ({ children }) => {
     await updateTokenStorage(null);
   }, [queryCache]);
 
+  const handleRole = useCallback(
+    (r) => {
+      console.log({ r });
+      if (!r) return false;
+
+      const givenRoles = Array.isArray(r) ? r : [r];
+      const roles = user?.role || [];
+      return givenRoles.some((r) => roles?.includes(r));
+    },
+    [user]
+  );
+
   useEffect(() => {
     (async () => {
       try {
@@ -79,8 +91,9 @@ export const AuthProvider = ({ children }) => {
       logout: handleLogout,
       updateToken: handleUpdateToken,
       updateUser: handleUpdateUser,
+      hasRole: handleRole,
     }),
-    [user, handleLogout, handleUpdateToken, handleUpdateUser, token]
+    [token, user, handleLogout, handleUpdateToken, handleUpdateUser, handleRole]
   );
 
   return (

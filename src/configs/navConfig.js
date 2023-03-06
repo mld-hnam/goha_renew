@@ -1,4 +1,8 @@
-import { TeamOutlined, UserSwitchOutlined } from "@ant-design/icons";
+import {
+  TeamOutlined,
+  UserSwitchOutlined,
+  CodeSandboxOutlined,
+} from "@ant-design/icons";
 
 const usersNavtree = [
   {
@@ -29,6 +33,27 @@ const usersNavtree = [
   },
 ];
 
-const navConfig = [...usersNavtree];
+const ordersNavtree = [
+  {
+    key: "orders",
+    path: `/orders`,
+    title: "Order Management",
+    icon: CodeSandboxOutlined,
+    breadcrumb: true,
+    isGroupTitle: true,
+    submenu: [
+      {
+        key: "orders",
+        path: `/orders`,
+        title: "Orders",
+        icon: CodeSandboxOutlined,
+        breadcrumb: false,
+        submenu: [],
+      },
+    ],
+  },
+];
+
+const navConfig = [...usersNavtree, ...ordersNavtree];
 
 export default navConfig;

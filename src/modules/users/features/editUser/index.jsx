@@ -1,5 +1,5 @@
 import Flex from "@/components/flex";
-import { Button } from "antd";
+import { Button, Skeleton } from "antd";
 import React from "react";
 import { useForm } from "antd/lib/form/Form";
 import { useNavigate, useParams } from "react-router-dom";
@@ -10,7 +10,8 @@ import useUpdateUser from "../../services/useUpdateUser";
 export default function EditUser() {
   const [form] = useForm();
   const { userId } = useParams();
-  const { mutateAsync: updateUser } = useUpdateUser();
+  const { mutateAsync: updateUser, isLoading: isLoadingUpdate } =
+    useUpdateUser();
 
   const { data: user, isLoading } = useGetUser(userId, {
     enabled: Boolean(userId),
@@ -38,13 +39,13 @@ export default function EditUser() {
             justifyContent="between"
             alignItems="center"
           >
-            <h2>Update user: {user?.name}</h2>
+            <h2>Update: {user?.name}</h2>
             <div>
               <Button
                 type="primary"
                 onClick={onSubmit}
                 htmlType="submit"
-                loading={isLoading}
+                loading={isLoading || isLoadingUpdate}
               >
                 Submit
               </Button>
@@ -52,8 +53,16 @@ export default function EditUser() {
           </Flex>
         </div>
       </div>
-      {!isLoading && (
-        <UserForm form={form} initialValues={user} onSubmit={onSubmit} />
+      {isLoading ? (
+        <Skeleton />
+      ) : (
+        <UserForm
+          form={form}
+          initialValues={user}
+          onSubmit={onSubmit}
+          isLoading={isLoadingUpdate}
+          mode="EDIT"
+        />
       )}
     </div>
   );

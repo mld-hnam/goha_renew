@@ -48,7 +48,7 @@ export default function AddUser() {
           </Flex>
         </div>
       </div>
-      <UserForm form={form} onSubmit={onSubmit} />
+      <UserForm form={form} isLoading={isLoading} onSubmit={onSubmit} />
     </div>
   );
 }

@@ -1,12 +1,16 @@
 import { Button, Space, Tooltip } from "antd";
-import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import {
+  AreaChartOutlined,
+  DeleteOutlined,
+  EditOutlined,
+} from "@ant-design/icons";
 
 import DeleteUserModal from "./deleteUserModal";
 import React from "react";
 import { useNavigate } from "react-router";
 import useModal from "@/hooks/useModal";
 
-const UserActions = ({ record }) => {
+const AgencyAction = ({ record }) => {
   const { openModal, closeModal } = useModal();
   const navigate = useNavigate();
   const onRemove = (id) => {
@@ -19,6 +23,10 @@ const UserActions = ({ record }) => {
 
   const onEdit = (id) => {
     navigate(`/users/edit/${id}`);
+  };
+
+  const onViewOrderUser = (id) => {
+    navigate(`/order-user/${id}`);
   };
 
   return (
@@ -38,8 +46,16 @@ const UserActions = ({ record }) => {
           icon={<DeleteOutlined />}
         />
       </Tooltip>
+
+      <Tooltip title="View Order">
+        <Button
+          onClick={() => onViewOrderUser(record?.id)}
+          shape="circle"
+          icon={<AreaChartOutlined />}
+        />
+      </Tooltip>
     </Space>
   );
 };
 
-export default UserActions;
+export default AgencyAction;
