@@ -9,6 +9,7 @@ import useModal from "@/hooks/useModal";
 const UserActions = ({ record }) => {
   const { openModal, closeModal } = useModal();
   const navigate = useNavigate();
+  
   const onRemove = (id) => {
     return openModal(DeleteUserModal, {
       userId: id,

@@ -10,6 +10,7 @@ const FilterListUser = ({ filters, onChange }) => {
     () => debounce((val) => onChange({ ...filters, filter: val }), 300),
     [onChange, filters]
   );
+  
   const onChangeStatus = (val) => onChange({ ...filters, role: val });
 
   return (

@@ -11,7 +11,7 @@ import { useAuth } from "@/hooks/useAuth";
 
 const OrderTable = ({ data, loading, onChange, ...props }) => {
   const navigate = useNavigate();
-  const { openModal, closeModal } = useModal();
+  // const { openModal, closeModal } = useModal();
   const { hasRoles } = useAuth();
 
   const columns = [

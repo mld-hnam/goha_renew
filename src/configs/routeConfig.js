@@ -48,4 +48,9 @@ export const protectedRoutes = [
     path: `/orders`,
     component: React.lazy(() => import("@/modules/order/features/listOrder")),
   },
+  {
+    key: "addOrder",
+    path: `/orders/add`,
+    component: React.lazy(() => import("@/modules/order/features/addOrder")),
+  },
 ];
