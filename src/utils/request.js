@@ -37,6 +37,7 @@ export function getPathname(config) {
   }
   return new URL(url).pathname;
 }
+
 export function notifyError(notifier, error) {
   const errorDetails = getErrorDetails(error);
   notifier(errorDetails);
@@ -108,18 +109,21 @@ export function createHandlerChain(handlers = []) {
     return Promise.reject(error);
   };
 }
+
 export function serverErrorHandler(error, next) {
   if (!isResponseError(error) || !isServerError(error)) {
     return next();
   }
   notifyError(errorMessage, error);
 }
+
 export function userErrorHandler(error, next) {
   if (!isResponseError(error) || !isUserError(error)) {
     return next();
   }
   notifyError(errorMessage, error);
 }
+
 export async function unauthorizedErrorHandler(error, next) {
   if (isUnauthorized(error)) {
     /**

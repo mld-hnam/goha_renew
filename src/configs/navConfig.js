@@ -54,6 +54,27 @@ const ordersNavtree = [
   },
 ];
 
-const navConfig = [...usersNavtree, ...ordersNavtree];
+const customerNavtree = [
+  {
+    key: "customer",
+    path: `/customers`,
+    title: "Customer Management",
+    icon: CodeSandboxOutlined,
+    breadcrumb: true,
+    isGroupTitle: true,
+    submenu: [
+      {
+        key: "customers",
+        path: `/customers`,
+        title: "Customers",
+        icon: CodeSandboxOutlined,
+        breadcrumb: false,
+        submenu: [],
+      },
+    ],
+  },
+];
+
+const navConfig = [...usersNavtree, ...customerNavtree, ...ordersNavtree];
 
 export default navConfig;

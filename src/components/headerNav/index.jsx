@@ -51,7 +51,7 @@ export const HeaderNav = () => {
     <Header className={`app-header`}>
       <div className={`app-header-wrapper justify-between`}>
         <div className="logo">
-          <img src={`/img/logo.png`} alt={`logo`} />
+          {/* <img src={`/img/logo.png`} alt={`logo`} /> */}
         </div>
         <div className="nav" style={{ width: `calc(100% - 250px` }}>
           <div className="nav-right">
