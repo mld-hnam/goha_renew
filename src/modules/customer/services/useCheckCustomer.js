@@ -3,7 +3,7 @@ import { useMutation } from "react-query";
 
 const useCheckCustomer = () =>
   useMutation(["customer"], async (payload) =>
-    request.post(`customers/checkemail`, { ...payload })
+    request.post(`customers/check-email`, { ...payload })
   );
 
 export default useCheckCustomer;

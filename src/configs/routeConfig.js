@@ -53,4 +53,12 @@ export const protectedRoutes = [
     path: `/orders/add`,
     component: React.lazy(() => import("@/modules/order/features/addOrder")),
   },
+
+  {
+    key: "customers",
+    path: `/customers`,
+    component: React.lazy(() =>
+      import("@/modules/customer/features/listCustomer")
+    ),
+  },
 ];

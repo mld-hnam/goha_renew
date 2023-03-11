@@ -1,10 +1,9 @@
 import React, { useRef } from "react";
 import { PrinterOutlined } from "@ant-design/icons";
-import { Card, Table, Button } from "antd";
-// import { NumericFormat } from "react-number-format";
+import { Card, Button } from "antd";
 import moment from "moment";
 import { useReactToPrint } from "react-to-print";
-import styles from "./invoice.style.css";
+import classes from "./invoice.module.css";
 
 export default function BillingInformation({ data }) {
   const {
@@ -27,6 +26,7 @@ export default function BillingInformation({ data }) {
     packageDescription,
     packageNumber,
   } = data || {};
+
   const componentRef = useRef(null);
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
@@ -35,7 +35,7 @@ export default function BillingInformation({ data }) {
   return (
     <Card>
       <div
-        className={`d-md-flex justify-content-md-between ${styles.invoiceBox}`}
+        className={`d-md-flex justify-content-md-between ${classes.invoiceBox}`}
         ref={componentRef}
       >
         <div>
@@ -59,11 +59,11 @@ export default function BillingInformation({ data }) {
                 Consignee Information
               </span>
               <br />
-              <span>Payment By: {paymentBy || "-"}</span>
+              <span>Full Name: {fullName_conSignee || "-"}</span>
               <br />
-              <span>Weight: {weight || "-"}</span>
+              <span>Phone: {phone_conSignee || "-"}</span>
               <br />
-              <span>Shipping Cost For LBS: {cost || "-"}</span>
+              <span>Email: {email_conSignee || "-"}</span>
               <br />
             </p>
           </address>
@@ -72,6 +72,12 @@ export default function BillingInformation({ data }) {
               <span className="font-weight-semibold text-dark font-size-md">
                 Shipping Cost
               </span>
+              <br />
+              <span>Package Number: {packageNumber || "-"}</span>
+              <br />
+              <span>Address: {address || "-"}</span>
+              <br />
+              <span>Package Description: {packageDescription || "-"}</span>
               <br />
               <span>Payment By: {paymentBy || "-"}</span>
               <br />

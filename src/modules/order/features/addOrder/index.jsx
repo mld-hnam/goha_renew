@@ -7,19 +7,64 @@ import { useNavigate } from "react-router-dom";
 import OrderForm from "../../components/orderForm";
 import { calTotalCost } from "../../services/calTotalCost";
 import { NumericFormat } from "react-number-format";
+import { useAuth } from "@/hooks/useAuth";
+import useUpdateShipmentHistory from "../../services/useUpdateShipmentHistory";
+import useCreateCustomer from "@/modules/customer/services/useCreateCustomer";
+import useCheckCustomer from "@/modules/customer/services/useCheckCustomer";
 
 export default function AddOrder() {
   const [form] = useForm();
   const navigate = useNavigate();
 
-  const { mutateAsync: createUser, isLoading } = useCreateOrder();
+  const { mutateAsync: createOrder, isLoading } = useCreateOrder();
+
+  const { mutateAsync: updateShipmentHistory } = useUpdateShipmentHistory();
+  const { mutateAsync: createCustomer } = useCreateCustomer();
+  const { mutateAsync: checkEmail } = useCheckCustomer();
+
   const [values, setValues] = useState(0);
+  const { profile } = useAuth();
+
   const onSubmit = async () => {
     try {
-      await form.validateFields();
       const values = form.getFieldsValue();
-      const { confirmPassword, ...payload } = values;
-      await createUser({ ...payload });
+      const totalCost = calTotalCost(values);
+
+      const { fullName_ship, email_ship, phone_ship, ...orders } = values;
+
+      const payloadCustomer = {
+        fullname: fullName_ship,
+        email: email_ship,
+        phone: phone_ship,
+        userId: profile?.id,
+      };
+
+      let customer;
+      const hasCustomer = await checkEmail({ email: email_ship });
+
+      if (hasCustomer) {
+        customer = hasCustomer;
+      } else {
+        customer = await createCustomer(payloadCustomer);
+      }
+      const payloadOrder = {
+        ...orders,
+        fullName_ship: customer.fullname,
+        email_ship: customer.email,
+        phone_ship: customer.phone,
+        totalCost,
+        userId: profile?.id,
+      };
+      const res = await createOrder(payloadOrder);
+
+      await updateShipmentHistory({
+        orderId: res?.id,
+        userId: profile?.id,
+        status: res?.status,
+        note: "Packages Successfully",
+        state: true,
+      });
+
       navigate("/orders");
     } catch (error) {
       message.error("Error: please check your input fields");

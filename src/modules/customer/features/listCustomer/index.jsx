@@ -1,19 +1,18 @@
 import { Button, Card } from "antd";
 import React from "react";
 import moment from "moment";
-import TableUser from "@/modules/users/components/tableUser";
 import useReflectionSearchParams from "@/hooks/useReflectionSearchParams";
-import useGetUsers from "../../services/useGetUsers";
-import { UserRole } from "../../components/labelUserRole";
-import UserActions from "../../components/userAction";
-import FilterListUser from "../../components/filterListUser";
 import { useNavigate } from "react-router-dom";
 import { PlusCircleOutlined } from "@ant-design/icons";
+import CustomerActions from "../../components/customerActions";
+import useGetCustomers from "@/modules/customer/services/useGetCustomers";
+import FilterListCustomer from "../../components/filterListCustomer";
+import TableCustomer from "../../components/tableCustomer";
 
 const columns = [
   {
     title: "Name",
-    dataIndex: "name",
+    dataIndex: "fullname",
     sorter: true,
   },
   {
@@ -25,10 +24,6 @@ const columns = [
     dataIndex: "email",
   },
   {
-    title: "Role",
-    render: (_, record) => <UserRole record={record} />,
-  },
-  {
     title: "Date",
     sorter: true,
     dataIndex: "createdAt",
@@ -36,12 +31,13 @@ const columns = [
   },
   {
     title: "Actions",
-    render: (_, record) => <UserActions record={record} />,
+    render: (_, record) => <CustomerActions record={record} />,
   },
 ];
 
-export default function ListUser() {
+export default function ListCustomer() {
   const navigate = useNavigate();
+
   const [{ page, limit, sortBy, filters }, setSearchParams] =
     useReflectionSearchParams({
       page: 0,
@@ -49,7 +45,7 @@ export default function ListUser() {
       sortBy: "desc",
     });
 
-  const { data, isLoading } = useGetUsers({
+  const { data, isLoading } = useGetCustomers({
     page,
     limit,
     sortBy,
@@ -73,22 +69,22 @@ export default function ListUser() {
   return (
     <Card bodyStyle={{ padding: "0px" }}>
       <div className="flex p-3 justify-between">
-        <FilterListUser filters={filters} onChange={changeFilter} />
+        <FilterListCustomer filters={filters} onChange={changeFilter} />
         <div className="flex justify-between">
           <Button
             onClick={() => {
-              navigate(`/users/add`);
+              navigate(`/customers/add`);
             }}
             type="primary"
             icon={<PlusCircleOutlined />}
             block
           >
-            Add user
+            Add customer
           </Button>
         </div>
       </div>
       <div className="table-responsive">
-        <TableUser
+        <TableCustomer
           tableColumns={columns}
           dataSource={data}
           loading={isLoading}

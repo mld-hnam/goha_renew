@@ -75,6 +75,32 @@ const customerNavtree = [
   },
 ];
 
-const navConfig = [...usersNavtree, ...customerNavtree, ...ordersNavtree];
+const flightNavtree = [
+  {
+    key: "flight",
+    path: `/flights`,
+    title: "Flights Management",
+    icon: CodeSandboxOutlined,
+    breadcrumb: true,
+    isGroupTitle: true,
+    submenu: [
+      {
+        key: "flights",
+        path: `/flights`,
+        title: "Flights",
+        icon: CodeSandboxOutlined,
+        breadcrumb: false,
+        submenu: [],
+      },
+    ],
+  },
+];
+
+const navConfig = [
+  ...ordersNavtree,
+  ...customerNavtree,
+  ...flightNavtree,
+  ...usersNavtree,
+];
 
 export default navConfig;
