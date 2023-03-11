@@ -1,4 +1,4 @@
-import { Button, Card } from "antd";
+import { Button, Card, Space } from "antd";
 import React from "react";
 import useReflectionSearchParams from "@/hooks/useReflectionSearchParams";
 import { useNavigate } from "react-router-dom";
@@ -50,16 +50,18 @@ export default function ListOrder() {
           <FilterListOrder filters={filters} onChange={changeFilter} />
         </div>
         <div className="flex justify-between">
-          <Button
-            onClick={() => {
-              navigate(`/orders/add`);
-            }}
-            type="primary"
-            icon={<PlusCircleOutlined />}
-            block
-          >
-            Add order
-          </Button>
+          <Space>
+            <Button
+              onClick={() => {
+                navigate(`/orders/add`);
+              }}
+              type="primary"
+              icon={<PlusCircleOutlined />}
+              block
+            >
+              Add order
+            </Button>
+          </Space>
         </div>
       </div>
       <div className="table-responsive">

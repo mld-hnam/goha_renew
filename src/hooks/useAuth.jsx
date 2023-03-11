@@ -59,17 +59,12 @@ export const AuthProvider = ({ children }) => {
     await updateTokenStorage(null);
   }, [queryCache]);
 
-  const handleRole = useCallback(
-    (r) => {
-      console.log({ r });
-      if (!r) return false;
-
-      const givenRoles = Array.isArray(r) ? r : [r];
-      const roles = user?.role || [];
-      return givenRoles.some((r) => roles?.includes(r));
-    },
-    [user]
-  );
+  const handleRole = useCallback((r) => {
+    if (!r) return false;
+    const givenRoles = Array.isArray(r) ? r : [r];
+    const roles = JSON.parse(getUser())?.role || [];
+    return givenRoles.some((r) => roles?.includes(r));
+  }, []);
 
   useEffect(() => {
     (async () => {
@@ -91,7 +86,7 @@ export const AuthProvider = ({ children }) => {
       logout: handleLogout,
       updateToken: handleUpdateToken,
       updateUser: handleUpdateUser,
-      hasRole: handleRole,
+      hasRoles: handleRole,
     }),
     [token, user, handleLogout, handleUpdateToken, handleUpdateUser, handleRole]
   );

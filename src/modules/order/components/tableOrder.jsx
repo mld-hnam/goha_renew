@@ -4,10 +4,11 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router";
 
 import OrderActions from "./orderActions";
-// import StatusAllShipmentModal from "@/modules/shipment/components/statusAllShipmentModal";
 import { LabelOrderStatus } from "./labelOrderStatus";
 import useModal from "@/hooks/useModal";
 import { useAuth } from "@/hooks/useAuth";
+import { FormOutlined } from "@ant-design/icons";
+import StatusAllShipmentModal from "./statusAllShipmentModal";
 
 const OrderTable = ({ data, loading, onChange, ...props }) => {
   const navigate = useNavigate();
@@ -69,10 +70,10 @@ const OrderTable = ({ data, loading, onChange, ...props }) => {
   };
 
   const onUpdateStatus = () => {
-    // return openModal(StatusAllShipmentModal, {
-    //   ids: selectedRowKeys,
-    //   closeModal,
-    // });
+    return openModal(StatusAllShipmentModal, {
+      ids: selectedRowKeys,
+      closeModal,
+    });
   };
 
   const rowSelection = {
@@ -84,24 +85,27 @@ const OrderTable = ({ data, loading, onChange, ...props }) => {
   return (
     <>
       <Space>
-        <p>
-          {hasSelected ? (
-            <>
-              <span>{`Selected ${selectedRowKeys.length} items: `}</span>
-              {hasRoles(["admin", "user"]) && (
-                <Button
-                  type="primary"
-                  disabled={!hasSelected}
-                  onClick={() => onUpdateStatus()}
-                >
-                  Update All
-                </Button>
-              )}
-            </>
-          ) : (
-            ""
-          )}
-        </p>
+        {hasSelected ? (
+          <Space>
+            <span style={{ paddingLeft: 15 }}>
+              {`Selected: `}
+              <b>{selectedRowKeys.length} </b>items
+            </span>
+            {hasRoles(["admin", "user"]) && (
+              <Button
+                type="primary"
+                size="small"
+                icon={<FormOutlined />}
+                disabled={!hasSelected}
+                onClick={() => onUpdateStatus()}
+              >
+                Update All
+              </Button>
+            )}
+          </Space>
+        ) : (
+          ""
+        )}
       </Space>
       <Table
         scroll={{
