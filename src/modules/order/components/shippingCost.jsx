@@ -42,6 +42,7 @@ const ShippingCost = ({ values }) => {
           >
             <InputNumber style={{ width: "100%" }} />
           </Form.Item>
+
           <Row gutter={6}>
             <Col span={18}>
               <Typography
@@ -152,6 +153,31 @@ const ShippingCost = ({ values }) => {
               <Radio value="CASH">CASH</Radio>
               <Radio value="UNPAID">UNPAID</Radio>
             </Radio.Group>
+          </Form.Item>
+          <Form.Item
+            label="Package Number"
+            name="packageNumber"
+            rules={[
+              {
+                required: true,
+                message: "Please input your Package Number!",
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            label="Package Description"
+            name="packageDescription"
+            rules={[
+              {
+                required: true,
+                message: "Please input your Package Description!",
+              },
+            ]}
+          >
+            <Input.TextArea rows={3} />
           </Form.Item>
         </Col>
       </Row>
