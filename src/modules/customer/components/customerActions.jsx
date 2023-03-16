@@ -3,8 +3,8 @@ import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 
 import DeleteCustomerModal from "./deleteCustomerModal";
 import React from "react";
-import { useNavigate } from "react-router";
 import useModal from "@/hooks/useModal";
+import { useNavigate } from "react-router";
 
 const CustomerActions = ({ record }) => {
   const { openModal, closeModal } = useModal();
@@ -31,8 +31,8 @@ const CustomerActions = ({ record }) => {
           icon={<EditOutlined />}
         />
       </Tooltip>
-
-      <Tooltip title="Delete customer">
+      
+      <Tooltip title="Delete">
         <Button
           onClick={() => onRemove(record?.id)}
           shape="circle"

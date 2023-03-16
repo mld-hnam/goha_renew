@@ -1,13 +1,14 @@
 import { Button, Card } from "antd";
-import React from "react";
-import moment from "moment";
-import useReflectionSearchParams from "@/hooks/useReflectionSearchParams";
-import { useNavigate } from "react-router-dom";
-import { PlusCircleOutlined } from "@ant-design/icons";
+
 import CustomerActions from "../../components/customerActions";
-import useGetCustomers from "@/modules/customer/services/useGetCustomers";
 import FilterListCustomer from "../../components/filterListCustomer";
+import { PlusCircleOutlined } from "@ant-design/icons";
+import React from "react";
 import TableCustomer from "../../components/tableCustomer";
+import moment from "moment";
+import useGetCustomers from "@/modules/customer/services/useGetCustomers";
+import { useNavigate } from "react-router-dom";
+import useReflectionSearchParams from "@/hooks/useReflectionSearchParams";
 
 const columns = [
   {
@@ -22,6 +23,10 @@ const columns = [
   {
     title: "Email",
     dataIndex: "email",
+  },
+  {
+    title: "Address",
+    dataIndex: "address",
   },
   {
     title: "Date",

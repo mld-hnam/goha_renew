@@ -66,4 +66,18 @@ export const protectedRoutes = [
       import("@/modules/customer/features/listCustomer")
     ),
   },
+  {
+    key: "customers",
+    path: `/customers/add`,
+    component: React.lazy(() =>
+      import("@/modules/customer/features/addCustomer")
+    ),
+  },
+  {
+    key: "customers",
+    path: `/customers/edit/:customerId`,
+    component: React.lazy(() =>
+      import("@/modules/customer/features/editCustomer")
+    ),
+  },
 ];

@@ -71,7 +71,7 @@ export default function EditOrder() {
                 type="primary"
                 onClick={onSubmit}
                 htmlType="submit"
-                loading={isLoading || loadingUpdate}
+                loading={isLoading || loadingUpdate }
               >
                 Submit
               </Button>
