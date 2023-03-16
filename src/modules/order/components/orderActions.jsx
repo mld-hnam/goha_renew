@@ -2,15 +2,13 @@ import {
   AreaChartOutlined,
   DeleteOutlined,
   EditOutlined,
-  PrinterOutlined,
 } from "@ant-design/icons";
 import { Button, Space, Tooltip } from "antd";
 
 import DeleteOrderModal from "./deleteOrderModal";
-// import PrintOrderModal from "./printOrderModal";
 import React from "react";
-import { useNavigate } from "react-router";
 import useModal from "@/hooks/useModal";
+import { useNavigate } from "react-router";
 
 const OrderActions = ({ record }) => {
   const { openModal, closeModal } = useModal();
@@ -20,12 +18,7 @@ const OrderActions = ({ record }) => {
   };
 
   const onEdit = (id) => {
-    navigate(`/orders/${id}`);
-  };
-
-  const onPrint = async (id) => {
-    return;
-    // return openModal(PrintOrderModal, { orderId: id });
+    navigate(`/orders/edit/${id}`);
   };
 
   const onTracking = (id, status) => {
@@ -47,14 +40,6 @@ const OrderActions = ({ record }) => {
           onClick={() => onRemove(record?.id)}
           shape="circle"
           icon={<DeleteOutlined />}
-        />
-      </Tooltip>
-
-      <Tooltip title="Print">
-        <Button
-          onClick={() => onPrint(record?.id)}
-          shape="circle"
-          icon={<PrinterOutlined />}
         />
       </Tooltip>
 

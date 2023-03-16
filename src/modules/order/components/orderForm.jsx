@@ -1,7 +1,8 @@
 import { Form, Tabs } from "antd";
-import React from "react";
+
 import BillingInformation from "./billingInformation";
 import ConsigneeInformation from "./consigneeInformation";
+import React from "react";
 import ShipperInformation from "./shipperInformation";
 import ShippingCost from "./shippingCost";
 
@@ -10,6 +11,7 @@ export default function OrderForm({
   initialValues,
   onFieldsChange,
   values,
+  mode='add'
 }) {
   return (
     <>
@@ -44,7 +46,7 @@ export default function OrderForm({
               {
                 label: "Billing Information",
                 key: "4",
-                children: <BillingInformation form={form} values={values} />,
+                children: <BillingInformation form={form} data={mode === 'add' ? values : initialValues} />,
               },
             ]}
           />

@@ -1,11 +1,13 @@
+import { Button, Card } from "antd";
 import React, { useRef } from "react";
+
 import { PrinterOutlined } from "@ant-design/icons";
-import { Card, Button } from "antd";
+import classes from "./invoice.module.css";
 import moment from "moment";
 import { useReactToPrint } from "react-to-print";
-import classes from "./invoice.module.css";
 
 export default function BillingInformation({ data }) {
+  console.log(data);
   const {
     code,
     createdAt,

@@ -3664,11 +3664,6 @@ pify@^2.3.0:
   resolved "https://registry.npmjs.org/pify/-/pify-2.3.0.tgz"
   integrity sha512-udgsAY+fTnvv7kI7aaxbqwWNb0AHiB0qBO89PZKPkoTmGOgdbrHDKD+0B2X4uTfJ/FT1R09r9gTsjUjNJotuog==
 
-plugin-syntax-dynamic-import@^8.0.11:
-  version "8.0.11"
-  resolved "https://registry.npmjs.org/plugin-syntax-dynamic-import/-/plugin-syntax-dynamic-import-8.0.11.tgz"
-  integrity sha512-Jog88YD114VXuaDsi0xEBiz628Tr3BgLggGQYjOV87EpA8JUFOJ+jzJEWDhV/lviu1oKe/52Al2auBJnzs7Llg==
-
 postcss-import@^14.1.0:
   version "14.1.0"
   resolved "https://registry.npmjs.org/postcss-import/-/postcss-import-14.1.0.tgz"

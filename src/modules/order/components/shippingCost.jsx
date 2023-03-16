@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Button,
   Card,
@@ -12,6 +11,8 @@ import {
   Typography,
 } from "antd";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
+
+import React from "react";
 
 const ShippingCost = ({ values }) => {
   return (
@@ -123,7 +124,7 @@ const ShippingCost = ({ values }) => {
             </Radio.Group>
           </Form.Item>
 
-          {values.insurance === true && (
+          {values?.insurance === true && (
             <Form.Item
               label="Declare Value"
               name="declareValue"
