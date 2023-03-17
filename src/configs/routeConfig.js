@@ -43,6 +43,7 @@ export const protectedRoutes = [
     path: `/users/agency`,
     component: React.lazy(() => import("@/modules/users/features/agency")),
   },
+  //
   {
     key: "orders",
     path: `/orders`,
@@ -58,26 +59,42 @@ export const protectedRoutes = [
     path: `/orders/edit/:orderId`,
     component: React.lazy(() => import("@/modules/order/features/editOrder")),
   },
-
+  //
   {
-    key: "customers",
+    key: "listCustomer",
     path: `/customers`,
     component: React.lazy(() =>
       import("@/modules/customer/features/listCustomer")
     ),
   },
   {
-    key: "customers",
+    key: "addCustomer",
     path: `/customers/add`,
     component: React.lazy(() =>
       import("@/modules/customer/features/addCustomer")
     ),
   },
   {
-    key: "customers",
+    key: "editCustomer",
     path: `/customers/edit/:customerId`,
     component: React.lazy(() =>
       import("@/modules/customer/features/editCustomer")
     ),
+  },
+  //
+  {
+    key: "flights",
+    path: `/flights`,
+    component: React.lazy(() => import("@/modules/flight/features/listFlight")),
+  },
+  {
+    key: "addFlight",
+    path: `/flights/add`,
+    component: React.lazy(() => import("@/modules/flight/features/addFlight")),
+  },
+  {
+    key: "editFlight",
+    path: `/flights/edit/:flightId`,
+    component: React.lazy(() => import("@/modules/flight/features/editFlight")),
   },
 ];

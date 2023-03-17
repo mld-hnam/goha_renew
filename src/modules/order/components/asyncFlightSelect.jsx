@@ -1,5 +1,5 @@
 import { useAuth } from "@/hooks/useAuth";
-import useGetFlights from "@/modules/flight/services/useFlights";
+import useGetFlights from "@/modules/flight/services/useGetFlights";
 import { AutoComplete } from "antd";
 import React, { useState } from "react";
 
