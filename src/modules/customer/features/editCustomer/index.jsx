@@ -7,23 +7,26 @@ import React from "react";
 import { useForm } from "antd/lib/form/Form";
 import useGetCustomer from "../../services/useGetCustomer";
 import useUpdateCustomer from "../../services/useUpdateCustomer";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function EditUser() {
   const [form] = useForm();
   const { customerId } = useParams();
   const { mutateAsync: updateCustomer, isLoading: isLoadingUpdate } =
-  useUpdateCustomer();
+    useUpdateCustomer();
 
   const { data: customer, isLoading } = useGetCustomer(customerId, {
     enabled: Boolean(customerId),
   });
 
   const navigate = useNavigate();
+  const { profile } = useAuth();
+
   const onSubmit = async () => {
     try {
       await form.validateFields();
       const values = form.getFieldsValue();
-      await updateCustomer({ ...values, id: customerId });
+      await updateCustomer({ ...values, id: customerId, userId: profile.id });
       navigate("/customers");
     } catch (error) {
       console.log({ error });

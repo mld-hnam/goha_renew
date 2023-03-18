@@ -5,9 +5,9 @@ import { PrinterOutlined } from "@ant-design/icons";
 import classes from "./invoice.module.css";
 import moment from "moment";
 import { useReactToPrint } from "react-to-print";
+import { NumericFormat } from "react-number-format";
 
-export default function BillingInformation({ data }) {
-  console.log(data);
+export default function BillingInformation({ data, isPrint = true }) {
   const {
     code,
     createdAt,
@@ -104,7 +104,12 @@ export default function BillingInformation({ data }) {
             <address>
               <p>
                 <span className="font-weight-semibold text-dark font-size-md">
-                  Total: $ {totalCost}
+                  <span>Total:</span>
+                  <NumericFormat
+                    thousandSeparator=","
+                    prefix={"$"}
+                    value={totalCost}
+                  />
                 </span>
               </p>
             </address>
@@ -122,14 +127,17 @@ export default function BillingInformation({ data }) {
           </div>
         </div>
       </div>
-
-      <hr className="d-print-none" />
-      <div className="text-right d-print-none my-3">
-        <Button type="primary" onClick={handlePrint}>
-          <PrinterOutlined type="printer" />
-          <span className="ml-1">Print</span>
-        </Button>
-      </div>
+      {isPrint && (
+        <>
+          <hr className="d-print-none" />
+          <div className="text-right d-print-none my-3">
+            <Button type="primary" onClick={handlePrint}>
+              <PrinterOutlined type="printer" />
+              <span className="ml-1">Print</span>
+            </Button>
+          </div>
+        </>
+      )}
     </Card>
   );
 }

@@ -97,4 +97,11 @@ export const protectedRoutes = [
     path: `/flights/edit/:flightId`,
     component: React.lazy(() => import("@/modules/flight/features/editFlight")),
   },
+   //
+   {
+    key: "trackings",
+    path: `/trackings`,
+    component: React.lazy(() => import("@/modules/tracking/features/trackings")),
+  },
+ 
 ];

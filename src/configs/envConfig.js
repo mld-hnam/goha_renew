@@ -1,5 +1,5 @@
 const dev = {
-  API_ENDPOINT_URL: "https://goha-api.vercel.app/v1/",
+  API_ENDPOINT_URL: "http://localhost:3000/v1/",
 };
 
 const prod = {

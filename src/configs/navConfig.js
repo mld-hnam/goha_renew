@@ -96,10 +96,33 @@ const flightNavtree = [
   },
 ];
 
+const trackingNavtree = [
+  {
+    key: "tracking",
+    path: `/trackings`,
+    title: "Tracking Management",
+    icon: CodeSandboxOutlined,
+    breadcrumb: true,
+    isGroupTitle: true,
+    submenu: [
+      {
+        key: "tracking",
+        path: `/trackings`,
+        title: "Tracking",
+        icon: CodeSandboxOutlined,
+        breadcrumb: false,
+        submenu: [],
+      },
+    ],
+  },
+];
+
+
 const navConfig = [
   ...ordersNavtree,
   ...customerNavtree,
   ...flightNavtree,
+  ...trackingNavtree,
   ...usersNavtree,
 ];
 
