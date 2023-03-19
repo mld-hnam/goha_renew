@@ -20,7 +20,7 @@ const StatusAllShipmentModal = ({
   const [statusInput, setStatusInput] = useState("");
   const [state, setState] = useState(true);
   const invalidateOrder = useInvalidateOrder();
-  const { user } = useAuth();
+  const { profile } = useAuth();
   const [loading, setLoading] = useState(false);
 
   const onSubmit = async () => {
@@ -34,7 +34,7 @@ const StatusAllShipmentModal = ({
       {
         ids,
         status,
-        userId: user?.id,
+        userId: profile?.id,
         note,
         state,
       },
