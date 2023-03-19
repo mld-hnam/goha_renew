@@ -18,7 +18,8 @@ function RootRoutes() {
         })}
       </Route>
 
-      <Route path="/login" element={<PublicRoute />}>
+      <Route path="/" element={<PublicRoute />}>
+        <Route path="/" element={<Navigate replace to="dashboard" />} />
         {publicRoutes.map((route, index) => {
           const { component: Component, path, key } = route;
           return (

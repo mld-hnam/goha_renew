@@ -1,6 +1,6 @@
 import { useAuth } from "@/hooks/useAuth";
 import useGetFlights from "@/modules/flight/services/useGetFlights";
-import { AutoComplete } from "antd";
+import { AutoComplete, Input } from "antd";
 import React, { useState } from "react";
 
 const parseData = (data) =>
@@ -18,7 +18,7 @@ export default function AsyncFlightSelect({ ...props }) {
     filter: filter || undefined,
   };
 
-  const { data } = useGetFlights(params);
+  const { data, isLoading } = useGetFlights(params);
 
   return (
     <>
@@ -31,8 +31,13 @@ export default function AsyncFlightSelect({ ...props }) {
         filterOption={(inputValue, option) =>
           option.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
         }
-        placeholder="Enter code here..."
-      />
+      >
+        <Input.Search
+          placeholder="Enter code here..."
+          size="large"
+          loading={isLoading}
+        />
+      </AutoComplete>
     </>
   );
 }

@@ -1,8 +1,4 @@
-import {
-  AreaChartOutlined,
-  DeleteOutlined,
-  EditOutlined,
-} from "@ant-design/icons";
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Button, Space, Tooltip } from "antd";
 
 import DeleteOrderModal from "./deleteOrderModal";
@@ -21,10 +17,6 @@ const OrderActions = ({ record }) => {
     navigate(`/orders/edit/${id}`);
   };
 
-  const onTracking = (id, status) => {
-    navigate(`/orders/tracking/${id}/${status}`);
-  };
-
   return (
     <Space align="end" size="middle">
       <Tooltip title="Edit">
@@ -40,14 +32,6 @@ const OrderActions = ({ record }) => {
           onClick={() => onRemove(record?.id)}
           shape="circle"
           icon={<DeleteOutlined />}
-        />
-      </Tooltip>
-
-      <Tooltip title="Tracking">
-        <Button
-          onClick={() => onTracking(record?.id, record?.status)}
-          shape="circle"
-          icon={<AreaChartOutlined />}
         />
       </Tooltip>
     </Space>

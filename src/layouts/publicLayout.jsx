@@ -14,12 +14,8 @@ const PublicLayout = ({ children }) => {
     <div className={`h-100 light`}>
       <Row justify="center" className="align-items-stretch h-100">
         <Col xs={20} sm={20} md={24} lg={16}>
-          <div className="container d-flex flex-column justify-content-center h-100">
-            <Row justify="center">
-              <Col xs={24} sm={24} md={20} lg={12} xl={10}>
-                <div className="mt-4">{children}</div>
-              </Col>
-            </Row>
+          <div className="container d-flex flex-column h-100">
+            <div className="mt-4">{children}</div>
           </div>
         </Col>
         <Col xs={0} sm={0} md={0} lg={8}>

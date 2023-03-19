@@ -1,7 +1,6 @@
 import { Button, Space, Table } from "antd";
 import moment from "moment";
 import React, { useState } from "react";
-import { useNavigate } from "react-router";
 
 import OrderActions from "./orderActions";
 import { LabelOrderStatus } from "./labelOrderStatus";
@@ -11,7 +10,6 @@ import { FormOutlined } from "@ant-design/icons";
 import StatusAllShipmentModal from "./statusAllShipmentModal";
 
 const OrderTable = ({ data, loading, onChange, ...props }) => {
-  const navigate = useNavigate();
   const { openModal, closeModal } = useModal();
   const { hasRoles } = useAuth();
 
@@ -28,14 +26,6 @@ const OrderTable = ({ data, loading, onChange, ...props }) => {
     {
       title: "Flight No",
       dataIndex: "flightNo",
-      render: (_, record) => (
-        <Button
-          onClick={() => navigate(`/order-flight/${record?.flightNo}`)}
-          type="link"
-        >
-          {record?.flightNo}
-        </Button>
-      ),
     },
     {
       title: "Phone",

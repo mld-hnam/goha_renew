@@ -36,7 +36,6 @@ export default function Tracking() {
       );
     });
   };
-  console.log({ histories });
 
   return (
     <>

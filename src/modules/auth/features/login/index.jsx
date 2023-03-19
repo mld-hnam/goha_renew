@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Card, Form, Input } from "antd";
+import { Button, Card, Col, Form, Input, Row } from "antd";
 
 import { MailOutlined, LockOutlined } from "@ant-design/icons";
 
@@ -27,52 +27,61 @@ export default function Login() {
   };
 
   return (
-    <Card>
-      <h1>Sign In</h1>
-      <p>
-        Do you want check order ? <Link to="/tracking">Tracking page</Link>
-      </p>
-      <Form form={form} layout="vertical" name="login-form">
-        <Form.Item
-          name="email"
-          label="Email"
-          rules={[
-            {
-              required: true,
-              message: "Please input your email",
-            },
-            {
-              type: "email",
-              message: "Please enter a validate email!",
-            },
-          ]}
-        >
-          <Input prefix={<MailOutlined className="text-primary" />} />
-        </Form.Item>
-        <Form.Item
-          name="password"
-          label="Password"
-          rules={[
-            {
-              required: true,
-              message: "Please input your password",
-            },
-          ]}
-        >
-          <Input.Password prefix={<LockOutlined className="text-primary" />} />
-        </Form.Item>
-        <Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            onClick={onLogin}
-            block
-            loading={isLoading}
-          >
-            Sign In
-          </Button>
-        </Form.Item>
-      </Form>
-    </Card>
+    <Row justify="center" align="center">
+      <Col xs={24} sm={24} md={20} lg={18} xl={10}>
+        <div className="mt-4">
+          <Card style={{ widtd: "100%" }}>
+            <h1>Sign In</h1>
+            <p>
+              Do you want check order ?{" "}
+              <Link to="/tracking">Tracking page</Link>
+            </p>
+            <Form form={form} layout="vertical" name="login-form">
+              <Form.Item
+                name="email"
+                label="Email"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input your email",
+                  },
+                  {
+                    type: "email",
+                    message: "Please enter a validate email!",
+                  },
+                ]}
+              >
+                <Input prefix={<MailOutlined className="text-primary" />} />
+              </Form.Item>
+              <Form.Item
+                name="password"
+                label="Password"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input your password",
+                  },
+                ]}
+              >
+                <Input.Password
+                  prefix={<LockOutlined className="text-primary" />}
+                />
+              </Form.Item>
+              <Form.Item>
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  onClick={onLogin}
+                  block
+                  loading={isLoading}
+                >
+                  Sign In
+                </Button>
+              </Form.Item>
+            </Form>
+          </Card>
+        </div>
+      </Col>
+    </Row>
   );
 }

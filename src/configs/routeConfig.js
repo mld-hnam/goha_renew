@@ -1,16 +1,17 @@
 import React from "react";
 
+
 export const publicRoutes = [
+  {
+    key: "tracking",
+    path: `/tracking`,
+    component: React.lazy(() => import("@/modules/tracking/features/userTracking")),
+  },
   {
     key: "login",
     path: `/login`,
     component: React.lazy(() => import("@/modules/auth/features/login")),
   },
-  // {
-  //   key: "publicTracking",
-  //   path: `/public/tracking`,
-  //   component: React.lazy(() => import("@/modules/tracking/features/trackings")),
-  // },
 ];
 /**
  * Protected routes

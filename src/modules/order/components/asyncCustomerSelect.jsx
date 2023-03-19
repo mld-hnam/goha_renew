@@ -1,6 +1,6 @@
 import { useAuth } from "@/hooks/useAuth";
 import useGetCustomers from "@/modules/customer/services/useGetCustomers";
-import { AutoComplete } from "antd";
+import { AutoComplete, Input } from "antd";
 import React, { useState } from "react";
 
 const parseData = (data) =>
@@ -18,7 +18,7 @@ export default function AsyncCustomerSelect({ onSelect, ...props }) {
     filter: filter || undefined,
   };
 
-  const { data: dataCustomer } = useGetCustomers(params);
+  const { data: dataCustomer, isLoading } = useGetCustomers(params);
 
   const handleSelect = (value) => {
     const item = parseData(dataCustomer)?.find((item) => item.email === value);
@@ -41,7 +41,12 @@ export default function AsyncCustomerSelect({ onSelect, ...props }) {
       filterOption={(inputValue, option) =>
         option.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
       }
-      placeholder="Enter email here..."
-    />
+    >
+      <Input.Search
+        placeholder="Enter email here..."
+        size="large"
+        loading={isLoading}
+      />
+    </AutoComplete>
   );
 }
