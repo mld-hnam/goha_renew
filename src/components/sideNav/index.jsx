@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { Scrollbars } from "react-custom-scrollbars-2";
 import navConfig from "@/configs/navConfig";
 import Icon from "@/components/icon";
+import { useAuth } from "@/hooks/useAuth";
 
 const { Sider } = Layout;
 
@@ -22,7 +23,7 @@ const setDefaultOpen = (key) => {
   return keyList;
 };
 
-const MenuItem = ({ title, icon, path }) => {
+const MenuItem = ({ title, icon, path, roles }) => {
   return (
     <>
       {icon && <Icon type={icon} />}
@@ -32,26 +33,34 @@ const MenuItem = ({ title, icon, path }) => {
   );
 };
 
-const getSideNavMenuItem = (navItem) =>
-  navItem.map((nav) => {
+const getSideNavMenuItem = (navItem, role) => {
+  return navItem.map((nav) => {
+    if (nav.roles && !nav.roles.includes(role)) return false;
     return {
       key: nav.key,
       label: (
         <MenuItem
+          roles={nav.roles || []}
           title={nav.title}
           {...(nav.isGroupTitle ? {} : { path: nav.path, icon: nav.icon })}
         />
       ),
       ...(nav.isGroupTitle ? { type: "group" } : {}),
       ...(nav.submenu.length > 0
-        ? { children: getSideNavMenuItem(nav.submenu) }
+        ? { children: getSideNavMenuItem(nav.submenu, role) }
         : {}),
     };
   });
+};
 
 const SideNavContent = (props) => {
   const { routeInfo, hideGroupTitle } = props;
-  const menuItems = useMemo(() => getSideNavMenuItem(navConfig), []);
+  const { profile } = useAuth();
+  const menuItems = useMemo(
+    () => getSideNavMenuItem(navConfig, profile.role),
+    [profile]
+  );
+
   return (
     <Menu
       mode="inline"

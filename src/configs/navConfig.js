@@ -12,6 +12,7 @@ const usersNavtree = [
     icon: TeamOutlined,
     breadcrumb: true,
     isGroupTitle: true,
+    roles:['admin','user'],
     submenu: [
       {
         key: "users",
@@ -20,6 +21,7 @@ const usersNavtree = [
         icon: TeamOutlined,
         breadcrumb: false,
         submenu: [],
+        roles:['admin'],
       },
       {
         key: "agency",
@@ -28,6 +30,7 @@ const usersNavtree = [
         icon: UserSwitchOutlined,
         breadcrumb: true,
         submenu: [],
+        roles:['admin','user'],
       },
     ],
   },

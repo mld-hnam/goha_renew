@@ -18,6 +18,7 @@ export const AppLayout = ({ children }) => {
   const location = useLocation();
 
   const currentRouteInfo = getRouteInfo(navConfig, location.pathname);
+
   return (
     <Layout>
       <HeaderNav />
