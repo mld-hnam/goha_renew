@@ -43,9 +43,11 @@ export default function BillingInformation({ data, isPrint = true }) {
         <div>
           <address>
             <p>
-              <span className="font-weight-semibold text-dark font-size-md">
-                Shipper Information
-              </span>
+              <h2>
+                <span className="font-weight-semibold text-dark font-size-md">
+                  Shipper Information
+                </span>
+              </h2>
               <br />
               <span>Full Name: {fullName_ship || "-"}</span>
               <br />
@@ -57,9 +59,11 @@ export default function BillingInformation({ data, isPrint = true }) {
           </address>
           <address>
             <p>
-              <span className="font-weight-semibold text-dark font-size-md">
-                Consignee Information
-              </span>
+              <h2>
+                <span className="font-weight-semibold text-dark font-size-md">
+                  Consignee Information
+                </span>
+              </h2>
               <br />
               <span>Full Name: {fullName_conSignee || "-"}</span>
               <br />
@@ -71,9 +75,11 @@ export default function BillingInformation({ data, isPrint = true }) {
           </address>
           <address>
             <p>
-              <span className="font-weight-semibold text-dark font-size-md">
-                Shipping Cost
-              </span>
+              <h2>
+                <span className="font-weight-semibold text-dark font-size-md">
+                  Shipping Cost
+                </span>
+              </h2>
               <br />
               <span>Package Number: {packageNumber || "-"}</span>
               <br />

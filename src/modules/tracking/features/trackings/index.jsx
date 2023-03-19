@@ -1,22 +1,45 @@
 import React, { useState } from "react";
-import { Row, Col, Card, Space } from "antd";
+import { Row, Col, Card, Space, Timeline } from "antd";
 import AsyncOrderSelect from "@/modules/order/components/asyncOrderInput";
 import BillingInformation from "@/modules/order/components/billingInformation";
+import { CheckCircleFilled } from "@ant-design/icons";
+import useGetAllHistory from "../../services/useGetAllHistory";
+import Loading from "@/components/loading";
+import { OrderStatus } from "@/modules/order/services";
 
 export default function Tracking() {
   const [data, setData] = useState();
+
   const onSelect = (val) => {
     setData(val);
   };
-  console.log({ data });
+
+  const { data: histories, isLoading } = useGetAllHistory(
+    { orderId: data?.id },
+    {
+      enabled: Boolean(data),
+    }
+  );
+
+  const renderTimeLine = () => {
+    return Object.keys(OrderStatus).map((item) => {
+      const currentItem = histories.find((k) => k?.status === item);
+      const isActive = currentItem?.state === true;
+      return (
+        <Timeline.Item
+          color={isActive ? "green" : "gray"}
+          dot={isActive && <CheckCircleFilled style={{ fontSize: "16px" }} />}
+          label={item}
+        >
+          {currentItem?.note || "Waiting..."}
+        </Timeline.Item>
+      );
+    });
+  };
+  console.log({ histories });
+
   return (
     <>
-      <div className="flex p-3 justify-between">
-        <div style={{ width: "70%" }}>
-          {/* <FilterListOrder filters={filters} onChange={changeFilter} /> */}
-        </div>
-        <div className="flex justify-between"></div>
-      </div>
       <div className="table-responsive">
         <Row gutter={16}>
           <Col span={12}>
@@ -26,7 +49,15 @@ export default function Tracking() {
             </Space>
           </Col>
           <Col span={12}>
-            <Card></Card>
+            <Card title="Tracking Order">
+              {isLoading ? (
+                <div className="text-center">
+                  <Loading />
+                </div>
+              ) : (
+                <Timeline mode="left">{histories && renderTimeLine()}</Timeline>
+              )}
+            </Card>
           </Col>
         </Row>
       </div>
