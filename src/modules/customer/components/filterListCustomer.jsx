@@ -15,6 +15,7 @@ const FilterListCustomer = ({ filters, onChange }) => {
     <Row gutter={16}>
       <Col span={16}>
         <Search
+          style={{ width: 320 }}
           onChange={(e) => onSearchChange(e.target.value)}
           placeholder="Search Name, Email, Phone ..."
         />

@@ -1,5 +1,5 @@
 import { Button, Space, Tooltip } from "antd";
-import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { DeleteOutlined, EditOutlined, EyeOutlined } from "@ant-design/icons";
 
 import DeleteFlightModal from "./deleteFlightModal";
 import React from "react";
@@ -22,9 +22,21 @@ const FlightActions = ({ record }) => {
     navigate(`/flights/edit/${id}`);
   };
 
+  const onViewOrder = (id) => {
+    navigate(`/orders/flight/${id}`);
+  };
+
   return (
     <Space align="end" size="middle">
-      <Tooltip title="Update customer">
+      <Tooltip title="View Order">
+        <Button
+          shape="circle"
+          onClick={() => onViewOrder(record?.id)}
+          icon={<EyeOutlined />}
+        />
+      </Tooltip>
+
+      <Tooltip title="Update">
         <Button
           shape="circle"
           onClick={() => onEdit(record?.id)}

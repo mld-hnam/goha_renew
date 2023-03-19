@@ -7,9 +7,9 @@ export const publicRoutes = [
     component: React.lazy(() => import("@/modules/auth/features/login")),
   },
   // {
-  //   key: "tracking",
-  //   path: `/tracking`,
-  //   component: React.lazy(() => import("@/modules/tracking/features/tracking")),
+  //   key: "publicTracking",
+  //   path: `/public/tracking`,
+  //   component: React.lazy(() => import("@/modules/tracking/features/trackings")),
   // },
 ];
 /**
@@ -43,7 +43,7 @@ export const protectedRoutes = [
     path: `/users/agency`,
     component: React.lazy(() => import("@/modules/users/features/agency")),
   },
-  //
+  // ORDER
   {
     key: "orders",
     path: `/orders`,
@@ -59,7 +59,12 @@ export const protectedRoutes = [
     path: `/orders/edit/:orderId`,
     component: React.lazy(() => import("@/modules/order/features/editOrder")),
   },
-  //
+  {
+    key: "orderFlight",
+    path: `/orders/flight/:flightId`,
+    component: React.lazy(() => import("@/modules/order/features/orderFlight")),
+  },
+  // CUSTOMER
   {
     key: "listCustomer",
     path: `/customers`,
@@ -81,7 +86,7 @@ export const protectedRoutes = [
       import("@/modules/customer/features/editCustomer")
     ),
   },
-  //
+  // FLIGHT
   {
     key: "flights",
     path: `/flights`,
@@ -96,6 +101,11 @@ export const protectedRoutes = [
     key: "editFlight",
     path: `/flights/edit/:flightId`,
     component: React.lazy(() => import("@/modules/flight/features/editFlight")),
+  },
+  {
+    key: "userFlight",
+    path: `/flights/user/:userId`,
+    component: React.lazy(() => import("@/modules/flight/features/userFlight")),
   },
    //
    {

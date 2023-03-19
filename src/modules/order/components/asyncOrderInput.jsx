@@ -18,7 +18,7 @@ export default function AsyncOrderSelect({ onSelect, ...props }) {
     filter: filter || undefined,
   };
 
-  const { data } = useOrders(params);
+  const { data, isLoading } = useOrders(params);
 
   const handleSelect = (value) => {
     const item = parseData(data)?.find((item) => item.code === value);
@@ -42,7 +42,12 @@ export default function AsyncOrderSelect({ onSelect, ...props }) {
         option.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
       }
     >
-      <Input.Search size="large" placeholder="Enter code here..." enterButton />
+      <Input.Search
+        size="large"
+        placeholder="Enter code here..."
+        loading={isLoading}
+        enterButton
+      />
     </AutoComplete>
   );
 }

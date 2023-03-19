@@ -1,7 +1,7 @@
 import { Button, Card, Space } from "antd";
 import React from "react";
 import useReflectionSearchParams from "@/hooks/useReflectionSearchParams";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import useOrders from "../../services/useOrders";
 import { useAuth } from "@/hooks/useAuth";
@@ -9,15 +9,26 @@ import OrderTable from "../../components/tableOrder";
 import FilterListOrder from "../../components/filterListOrder";
 import ExportExcel from "../../components/exportExcel";
 import moment from "moment";
+import useGetFlight from "@/modules/flight/services/useGetFlight";
 
-export default function ListOrder() {
+export default function OrderFlight() {
   const navigate = useNavigate();
+  const { flightId } = useParams();
+
+  const { data: flight } = useGetFlight(flightId, {
+    enabled: Boolean(flightId),
+  });
+
   const [{ page, limit, sortBy, filters }, setSearchParams] =
     useReflectionSearchParams({
       page: 0,
       limit: 20,
       sortBy: "desc",
+      filters: {
+        flightNo: flight?.code,
+      },
     });
+
   const { profile } = useAuth();
 
   const params = {
@@ -28,7 +39,10 @@ export default function ListOrder() {
   };
 
   const { data, isLoading } = useOrders(
-    profile?.role === "admin" ? params : { ...params, userId: profile.id }
+    profile?.role === "admin" ? params : { ...params, userId: profile.id },
+    {
+      enabled: Boolean(flight?.code),
+    }
   );
 
   const changeTable = (pagination) => {
