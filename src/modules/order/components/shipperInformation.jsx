@@ -74,7 +74,7 @@ const ShipperFormPart = ({ form }) => {
             </Form.Item>
             <Form.Item
               label="Address"
-              name="address"
+              name="address_ship"
               rules={[
                 {
                   required: true,
