@@ -46,6 +46,18 @@ const ConsigneeInformation = () => {
           >
             <Input />
           </Form.Item>
+          <Form.Item
+            label="Address"
+            name="address_conSignee"
+            rules={[
+              {
+                required: true,
+                message: "Please input your Address!",
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
         </Card>
       </Col>
     </Row>

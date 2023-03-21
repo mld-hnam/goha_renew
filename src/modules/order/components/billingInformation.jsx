@@ -18,6 +18,7 @@ export default function BillingInformation({ data, isPrint = true }) {
     fullName_conSignee,
     email_conSignee,
     phone_conSignee,
+    address_conSignee,
     paymentBy,
     weight,
     cost,
@@ -70,6 +71,8 @@ export default function BillingInformation({ data, isPrint = true }) {
               <span>Phone: {phone_conSignee || "-"}</span>
               <br />
               <span>Email: {email_conSignee || "-"}</span>
+              <br />
+              <span>Address: {address_conSignee || "-"}</span>
               <br />
             </p>
           </address>
