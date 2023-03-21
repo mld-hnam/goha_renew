@@ -16,6 +16,7 @@ function RootRoutes() {
             <Route key={key + index} path={path} element={<Component />} />
           );
         })}
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Route>
 
       <Route path="/" element={<PublicRoute />}>
