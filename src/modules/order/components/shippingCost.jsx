@@ -56,6 +56,7 @@ const ShippingCost = ({ values }) => {
               >
                 Other Fees:
               </Typography>
+
               <Form.List label="Other Fees:" name="fees">
                 {(fields, { add, remove }) => (
                   <>
@@ -155,7 +156,7 @@ const ShippingCost = ({ values }) => {
               <Radio value="UNPAID">UNPAID</Radio>
             </Radio.Group>
           </Form.Item>
-          <Form.Item
+          {/* <Form.Item
             label="Package Number"
             name="packageNumber"
             rules={[
@@ -166,7 +167,7 @@ const ShippingCost = ({ values }) => {
             ]}
           >
             <Input />
-          </Form.Item>
+          </Form.Item> */}
 
           <Form.Item
             label="Package Description"
@@ -180,6 +181,62 @@ const ShippingCost = ({ values }) => {
           >
             <Input.TextArea rows={3} />
           </Form.Item>
+
+          <Row>
+            <Col>
+              <Typography
+                style={{
+                  textAlign: "left",
+                  paddingTop: 5,
+                  fontWeight: "bold",
+                  marginBottom: "10px",
+                }}
+              >
+                Package Number: {values?.packageNumber?.length}
+              </Typography>
+
+              <Form.List label="Other Fees:" name="packageNumber">
+                {(fields, { add, remove }) => (
+                  <>
+                    {console.log(fields)}
+                    {fields.map(({ key, name, ...restField }) => (
+                      <Space
+                        key={key}
+                        style={{ display: "flex", marginBottom: 8 }}
+                        align="baseline"
+                      >
+                        <Form.Item
+                          {...restField}
+                          name={[name, "name"]}
+                          rules={[{ required: true, message: "Missing name" }]}
+                        >
+                          <Input placeholder="Name" />
+                        </Form.Item>
+
+                        <MinusCircleOutlined onClick={() => remove(name)} />
+                      </Space>
+                    ))}
+                    <Form.Item>
+                      <Button
+                        type="dashed"
+                        onClick={() => add()}
+                        block
+                        style={{
+                          width: "120px",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                        icon={<PlusOutlined />}
+                      >
+                        Add More
+                      </Button>
+                    </Form.Item>
+                  </>
+                )}
+              </Form.List>
+            </Col>
+          </Row>
         </Col>
       </Row>
     </Card>

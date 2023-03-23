@@ -84,7 +84,6 @@ export default function BillingInformation({ data, isPrint = true }) {
                 </span>
               </h2>
               <br />
-              <span>Package Number: {packageNumber || "-"}</span>
               <br />
               <span>Address: {address || "-"}</span>
               <br />
@@ -101,10 +100,19 @@ export default function BillingInformation({ data, isPrint = true }) {
               <span>
                 Other Fees:
                 {fees?.map((item) => (
-                  <p>
+                  <div>
                     <span>{`${item?.name}: `}</span>
                     <span> {` ${item?.price} $`}</span>
-                  </p>
+                  </div>
+                ))}
+              </span>
+              <br />
+              <span>
+                Package Number:
+                {packageNumber?.map((item) => (
+                  <div>
+                    <span>{`${item?.name}: `}</span>
+                  </div>
                 ))}
               </span>
             </p>

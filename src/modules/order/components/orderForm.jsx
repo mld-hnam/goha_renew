@@ -11,7 +11,7 @@ export default function OrderForm({
   initialValues,
   onFieldsChange,
   values,
-  mode='add'
+  mode = "add",
 }) {
   return (
     <>
@@ -46,7 +46,12 @@ export default function OrderForm({
               {
                 label: "Billing Information",
                 key: "4",
-                children: <BillingInformation form={form} data={mode === 'add' ? values : initialValues} />,
+                children: (
+                  <BillingInformation
+                    form={form}
+                    data={mode === "add" ? values : initialValues}
+                  />
+                ),
               },
             ]}
           />
