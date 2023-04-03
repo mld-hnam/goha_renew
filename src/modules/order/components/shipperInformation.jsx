@@ -6,7 +6,7 @@ const ShipperFormPart = ({ form }) => {
   const onSelectCustomer = (value) => {
     form.setFieldsValue({
       fullName_ship: value.fullname,
-      phone_ship: value.phone,
+      email_ship: value.email,
       address_ship: value.address,
     });
   };
@@ -17,16 +17,12 @@ const ShipperFormPart = ({ form }) => {
         <Col span={12}>
           <Card>
             <Form.Item
-              label="Email"
-              name="email_ship"
+              label="Phone"
+              name="phone_ship"
               rules={[
                 {
-                  type: "email",
-                  message: "The input is not valid E-Mail!",
-                },
-                {
                   required: true,
-                  message: "Please input your E-Mail!",
+                  message: "Please input your phone!",
                 },
               ]}
             >
@@ -61,9 +57,13 @@ const ShipperFormPart = ({ form }) => {
               <Input />
             </Form.Item>
             <Form.Item
-              label="Phone"
-              name="phone_ship"
+              label="Email Address"
+              name="email_ship"
               rules={[
+                {
+                  type: "email",
+                  message: "The input is not valid E-Mail!",
+                },
                 {
                   required: true,
                   message: "Please input your Phone!",

@@ -6,7 +6,7 @@ import React, { useState } from "react";
 const parseData = (data) =>
   data?.map((item) => ({
     ...item,
-    value: item.email,
+    value: item.phone,
   }));
 
 export default function AsyncCustomerSelect({ onSelect, ...props }) {
@@ -21,7 +21,7 @@ export default function AsyncCustomerSelect({ onSelect, ...props }) {
   const { data: dataCustomer, isLoading } = useGetCustomers(params);
 
   const handleSelect = (value) => {
-    const item = parseData(dataCustomer)?.find((item) => item.email === value);
+    const item = parseData(dataCustomer)?.find((item) => item.phone === value);
     if (item) {
       onSelect({
         ...item,
@@ -43,7 +43,7 @@ export default function AsyncCustomerSelect({ onSelect, ...props }) {
       }
     >
       <Input.Search
-        placeholder="Enter email here..."
+        placeholder="Enter phone here..."
         size="large"
         loading={isLoading}
       />

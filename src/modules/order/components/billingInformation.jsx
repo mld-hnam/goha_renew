@@ -26,7 +26,6 @@ export default function BillingInformation({ data, isPrint = true }) {
     insurance,
     totalCost,
     address,
-    packageDescription,
     packageNumber,
   } = data || {};
 
@@ -87,8 +86,6 @@ export default function BillingInformation({ data, isPrint = true }) {
               <br />
               <span>Address: {address || "-"}</span>
               <br />
-              <span>Package Description: {packageDescription || "-"}</span>
-              <br />
               <span>Payment By: {paymentBy || "-"}</span>
               <br />
               <span>Weight: {weight || "-"}</span>
@@ -110,9 +107,14 @@ export default function BillingInformation({ data, isPrint = true }) {
               <span>
                 Package Number:
                 {packageNumber?.map((item) => (
-                  <div>
-                    <span>{`${item?.name}: `}</span>
-                  </div>
+                  <>
+                    <div>
+                      <span>{`${item?.lbs}: `}</span>
+                    </div>
+                    <div>
+                      <span>{`${item?.description}: `}</span>
+                    </div>
+                  </>
                 ))}
               </span>
             </p>
