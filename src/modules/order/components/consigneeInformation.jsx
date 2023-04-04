@@ -1,9 +1,23 @@
-import { Card, Col, Form, Input, Row } from "antd";
+import { Card, Col, Form, Input, List, Row } from "antd";
 
-const ConsigneeInformation = () => {
+const ConsigneeInformation = ({ form }) => {
   return (
     <Row gutter={16}>
-      <Col span={16} offset={3}>
+      <Col span={12}>
+        <Card>
+          <List>
+            {form.getFieldValue("assignee")?.map((item) => (
+              <List.Item key={item.email}>
+                <List.Item.Meta title={item.name} description={item.email} />
+                <div>
+                  {item.phone} - {item.address}
+                </div>
+              </List.Item>
+            ))}
+          </List>
+        </Card>
+      </Col>
+      <Col span={12}>
         <Card>
           <Form.Item
             label="Email"
