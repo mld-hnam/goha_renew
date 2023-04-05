@@ -3,7 +3,7 @@ import { parse, stringify } from "qs";
 
 import history from "@/utils/history";
 import { API_BASE_URL } from "@/configs/appConfig";
-import { getToken, removeToken } from "./account";
+import { getToken, removeToken, removeUser } from "./account";
 import { displayErrorMessage } from "./message";
 
 const request = axios.create({
@@ -129,8 +129,10 @@ export async function unauthorizedErrorHandler(error, next) {
     /**
      * TODO: Handle refresh token
      */
-    errorMessage(getErrorDetails(error));
     removeToken();
+    removeUser();
+    errorMessage(getErrorDetails(error));
+
     return;
   }
   next();

@@ -7,9 +7,9 @@ const useGetCustomers = (params, option) =>
     ...option,
   });
 
-export function useInvalidateCustomer(params) {
+export function useInvalidateCustomer() {
   const queryClient = useQueryClient();
-  return () => queryClient.invalidateQueries(["customers", params]);
+  return () => queryClient.invalidateQueries(["customers"]);
 }
 
 export default useGetCustomers;

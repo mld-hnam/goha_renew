@@ -4,7 +4,9 @@ import { useForm } from "antd/lib/form/Form";
 import { Avatar, Button, Card, Col, Form, Input, List, Modal, Row } from "antd";
 import { useAuth } from "@/hooks/useAuth";
 import { useInvalidateCustomer } from "../services/useGetCustomers";
-import { DeleteOutlined } from "@ant-design/icons";
+import { DeleteOutlined, UserOutlined } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
+import VirtualList from "rc-virtual-list";
 
 export default function AddAssigneeModal({
   customer,
@@ -13,39 +15,58 @@ export default function AddAssigneeModal({
 }) {
   const [form] = useForm();
   const invalidateCustomer = useInvalidateCustomer();
-  const { mutateAsync: updateCustomer, isLoading } = useUpdateCustomer();
+  const { mutateAsync: updateCustomer, isLoading } = useUpdateCustomer({});
   const { profile } = useAuth();
+  const navigate = useNavigate();
 
-  const onSubmit = async () => {
+  const onUpdateCustomer = async (customer) => {
     try {
-      await form.validateFields();
-      const values = form.getFieldsValue();
-      const isAssignee = customer.assignee.find(
-        (item) => item.phone === values.phone || item.email === values.email
-      );
-      if (!isAssignee) {
-        const assignee = [...customer.assignee, values];
-        await updateCustomer(
-          {
-            ...customer,
-            assignee,
-            id: customer.id,
-            userId: profile.id,
+      await updateCustomer(
+        {
+          ...customer,
+          id: customer.id,
+          userId: profile.id,
+        },
+        {
+          onSuccess: async () => {
+            await invalidateCustomer();
+            await closeModal();
+            navigate("/customers");
           },
-          {
-            onSuccess: async () => {
-              await invalidateCustomer();
-              await closeModal();
-            },
-          }
-        );
-      }
+        }
+      );
     } catch (error) {
       console.log({ error });
     }
   };
 
-  const onRemove = () => {};
+  const onSubmit = async () => {
+    await form.validateFields();
+    const values = form.getFieldsValue();
+    const isAssignee = customer.assignee.find(
+      (item) => item.phone === values.phone || item.email === values.email
+    );
+    if (!isAssignee) {
+      const assignee = [...customer.assignee, values];
+      const payload = {
+        ...customer,
+        assignee,
+      };
+      onUpdateCustomer(payload);
+    }
+  };
+
+  const onRemove = async (item) => {
+    const dataUpdate = customer.assignee.filter(
+      (k) => k.phone !== item.phone || k.email !== item.email
+    );
+    if (!dataUpdate) return;
+    const payload = {
+      ...customer,
+      assignee: dataUpdate,
+    };
+    onUpdateCustomer(payload);
+  };
 
   return (
     <Modal
@@ -68,29 +89,35 @@ export default function AddAssigneeModal({
     >
       <Row gutter={16}>
         <Col span={12}>
-          <Card>
+          <Card title="Assignees">
             <List>
-              {customer.assignee?.map((item, index) => (
-                <List.Item key={item.email}>
-                  <List.Item.Meta
-                    avatar={<Avatar src="/img/avatars/thumb-1.jpg" />}
-                    title={item.name}
-                    description={item.email}
-                  />
-                  <div>
-                    <Button
-                      onClick={() => onRemove(item)}
-                      shape="circle"
-                      icon={<DeleteOutlined />}
+              <VirtualList
+                data={customer.assignee}
+                height={400}
+                itemKey="phone"
+              >
+                {(item) => (
+                  <List.Item key={item.email}>
+                    <List.Item.Meta
+                      avatar={<Avatar icon={<UserOutlined />} />}
+                      title={<a href="https://ant.design">{item.name}</a>}
+                      description={item.email}
                     />
-                  </div>
-                </List.Item>
-              ))}
+                    <div>
+                      <Button
+                        onClick={() => onRemove(item)}
+                        shape="circle"
+                        icon={<DeleteOutlined />}
+                      />
+                    </div>
+                  </List.Item>
+                )}
+              </VirtualList>
             </List>
           </Card>
         </Col>
         <Col span={12}>
-          <Card>
+          <Card title="Create assignee">
             <Form layout="vertical" form={form}>
               <Form.Item
                 label="Name"
