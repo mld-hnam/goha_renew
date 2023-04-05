@@ -81,14 +81,14 @@ export const AuthProvider = ({ children }) => {
 
   const contextValue = useMemo(
     () => ({
-      isAuthenticated: !!getToken(),
+      isAuthenticated: !!token,
       profile: JSON.parse(user),
       logout: handleLogout,
       updateToken: handleUpdateToken,
       updateUser: handleUpdateUser,
       hasRoles: handleRole,
     }),
-    [user, handleLogout, handleUpdateToken, handleUpdateUser, handleRole]
+    [token, user, handleLogout, handleUpdateToken, handleUpdateUser, handleRole]
   );
 
   return (

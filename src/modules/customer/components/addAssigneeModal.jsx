@@ -100,7 +100,7 @@ export default function AddAssigneeModal({
                   <List.Item key={item.email}>
                     <List.Item.Meta
                       avatar={<Avatar icon={<UserOutlined />} />}
-                      title={<a href="https://ant.design">{item.name}</a>}
+                      title={item.name}
                       description={item.email}
                     />
                     <div>

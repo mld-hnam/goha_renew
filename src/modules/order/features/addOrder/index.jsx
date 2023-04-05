@@ -30,7 +30,8 @@ export default function AddOrder() {
       const values = form.getFieldsValue();
       const totalCost = calTotalCost(values);
 
-      const { fullName_ship, email_ship, phone_ship, ...orders } = values;
+      const { fullName_ship, email_ship, phone_ship, customer, ...orders } =
+        values;
 
       const payloadCustomer = {
         fullname: fullName_ship,
@@ -39,19 +40,19 @@ export default function AddOrder() {
         userId: profile?.id,
       };
 
-      let customer;
+      let customers;
       const hasCustomer = await checkEmail({ email: email_ship });
 
       if (hasCustomer) {
-        customer = hasCustomer;
+        customers = hasCustomer;
       } else {
-        customer = await createCustomer(payloadCustomer);
+        customers = await createCustomer(payloadCustomer);
       }
       const payloadOrder = {
         ...orders,
-        fullName_ship: customer.fullname,
-        email_ship: customer.email,
-        phone_ship: customer.phone,
+        fullName_ship: customers.fullname,
+        email_ship: customers.email,
+        phone_ship: customers.phone,
         totalCost,
         userId: profile?.id,
       };

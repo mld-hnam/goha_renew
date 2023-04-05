@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { Button } from "antd";
@@ -16,16 +16,17 @@ export default function EditOrder() {
   const { data: order, isLoading } = useOrder(orderId, {
     enabled: Boolean(orderId),
   });
-  const { mutateAsync: updateOrder, isLoading:loadingUpdate } = useUpdateOrder();
+  const { mutateAsync: updateOrder, isLoading: loadingUpdate } =
+    useUpdateOrder();
   const navigation = useNavigate();
   const [values, setValues] = useState();
 
   const onSubmit = async () => {
     try {
       const values = form.getFieldsValue();
-      const totalCost = calTotalCost(values);
-
-      const payload = { ...order, ...values, totalCost };
+      const { customer, ...filterValue } = values;
+      const totalCost = calTotalCost(filterValue);
+      const payload = { ...order, ...filterValue, totalCost };
       await updateOrder(payload);
       navigation("/orders");
     } catch (error) {
@@ -71,7 +72,7 @@ export default function EditOrder() {
                 type="primary"
                 onClick={onSubmit}
                 htmlType="submit"
-                loading={isLoading || loadingUpdate }
+                loading={isLoading || loadingUpdate}
               >
                 Submit
               </Button>
@@ -79,16 +80,17 @@ export default function EditOrder() {
           </Flex>
         </div>
       </div>
-      {!isLoading &&  <OrderForm
-        form={form}
-        initialValues={order}
-        onFieldsChange={onFieldsChange}
-        isLoading={isLoading}
-        onSubmit={onSubmit}
-        values={values}
-        mode='edit'
-      />}
-     
+      {!isLoading && (
+        <OrderForm
+          form={form}
+          initialValues={order}
+          onFieldsChange={onFieldsChange}
+          isLoading={isLoading}
+          onSubmit={onSubmit}
+          values={values}
+          mode="edit"
+        />
+      )}
     </div>
   );
 }

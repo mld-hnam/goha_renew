@@ -170,7 +170,7 @@ const ShippingCost = ({ values }) => {
                 Package Number: {values?.packageNumber?.length}
               </Typography>
 
-              <Form.List label="Other Fees:" name="packageNumber">
+              <Form.List label="packageNumber:" name="packageNumber">
                 {(fields, { add, remove }) => (
                   <Row>
                     <Col span={24}>

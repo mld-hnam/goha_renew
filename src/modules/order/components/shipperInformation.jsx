@@ -8,7 +8,7 @@ const ShipperFormPart = ({ form }) => {
       fullName_ship: value.fullname,
       email_ship: value.email,
       address_ship: value.address,
-      assignee: value.assignee,
+      customer: value,
     });
   };
 

@@ -1,24 +1,76 @@
-import { Card, Col, Form, Input, List, Row } from "antd";
+import useModal from "@/hooks/useModal";
+import AddAssigneeModal from "@/modules/customer/components/addAssigneeModal";
+import { SendOutlined, UserOutlined } from "@ant-design/icons";
+import { Avatar, Button, Card, Col, Form, Input, List, Row } from "antd";
+import VirtualList from "rc-virtual-list";
 
 const ConsigneeInformation = ({ form }) => {
+  const { openModal, closeModal } = useModal();
+  const customer = form.getFieldValue("customer");
+
+  const onAssign = (item) => {
+    form.setFieldsValue({
+      fullName_conSignee: item.name,
+      email_conSignee: item.email,
+      phone_conSignee: item.phone,
+      address_conSignee: item.address,
+    });
+  };
+
+  const onAddAssignee = (customer) => {
+    return openModal(AddAssigneeModal, {
+      customer,
+      closeModal,
+    });
+  };
+
   return (
     <Row gutter={16}>
       <Col span={12}>
-        <Card>
+        <Card
+          title="Assignees"
+          extra={
+            <Button onClick={() => onAddAssignee(customer)}>
+              Add assignee
+            </Button>
+          }
+        >
           <List>
-            {form.getFieldValue("assignee")?.map((item) => (
-              <List.Item key={item.email}>
-                <List.Item.Meta title={item.name} description={item.email} />
-                <div>
-                  {item.phone} - {item.address}
-                </div>
-              </List.Item>
-            ))}
+            <VirtualList data={customer?.assignee} height={400} itemKey="phone">
+              {(item) => (
+                <List.Item key={item.phone}>
+                  <List.Item.Meta
+                    avatar={<Avatar icon={<UserOutlined />} />}
+                    title={item.name}
+                    description={item.email}
+                  />
+                  <div>
+                    <Button
+                      onClick={() => onAssign(item)}
+                      shape="circle"
+                      icon={<SendOutlined />}
+                    />
+                  </div>
+                </List.Item>
+              )}
+            </VirtualList>
           </List>
         </Card>
       </Col>
       <Col span={12}>
         <Card>
+          <Form.Item
+            label="Full Name"
+            name="fullName_conSignee"
+            rules={[
+              {
+                required: true,
+                message: "Please input your Full Name!",
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
           <Form.Item
             label="Email"
             name="email_conSignee"
@@ -30,18 +82,6 @@ const ConsigneeInformation = ({ form }) => {
               {
                 required: true,
                 message: "Please input your E-Mail!",
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            label="Full Name"
-            name="fullName_conSignee"
-            rules={[
-              {
-                required: true,
-                message: "Please input your Full Name!",
               },
             ]}
           >

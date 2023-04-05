@@ -1,8 +1,8 @@
 import { Button, Space, Tooltip } from "antd";
 import {
-  CheckCircleOutlined,
   DeleteOutlined,
   EditOutlined,
+  PlusCircleOutlined,
 } from "@ant-design/icons";
 
 import DeleteCustomerModal from "./deleteCustomerModal";
@@ -56,7 +56,7 @@ const CustomerActions = ({ record }) => {
         <Button
           onClick={() => onAddAssignee(record)}
           shape="circle"
-          icon={<CheckCircleOutlined />}
+          icon={<PlusCircleOutlined />}
         />
       </Tooltip>
     </Space>

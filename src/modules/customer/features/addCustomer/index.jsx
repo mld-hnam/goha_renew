@@ -5,11 +5,12 @@ import React from "react";
 import useCreateCustomer from "../../services/useCreateCustomer";
 import { useForm } from "antd/lib/form/Form";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function AddCustomer() {
   const [form] = useForm();
   const navigate = useNavigate();
-
+  const { profile } = useAuth();
   const { mutateAsync: createCustomer, isLoading } = useCreateCustomer();
 
   const onSubmit = async () => {
@@ -17,7 +18,7 @@ export default function AddCustomer() {
       await form.validateFields();
       const values = form.getFieldsValue();
       const { confirmPassword, ...payload } = values;
-      await createCustomer({ ...payload });
+      await createCustomer({ ...payload, userId: profile.id });
       navigate("/customers");
     } catch (error) {
       console.log({ error });
