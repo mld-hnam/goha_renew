@@ -47,10 +47,9 @@ export default function AddAssigneeModal({
       (item) => item.phone === values.phone || item.email === values.email
     );
     if (!isAssignee) {
-      const assignee = [...customer.assignee, values];
       const payload = {
         ...customer,
-        assignee,
+        assignee: [...customer.assignee, { ...values }],
       };
       onUpdateCustomer(payload);
     }
