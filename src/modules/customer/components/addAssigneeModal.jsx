@@ -15,9 +15,10 @@ export default function AddAssigneeModal({
 }) {
   const [form] = useForm();
   const invalidateCustomer = useInvalidateCustomer();
-  const { mutateAsync: updateCustomer, isLoading } = useUpdateCustomer({});
+  const { mutateAsync: updateCustomer, isLoading } = useUpdateCustomer();
   const { profile } = useAuth();
   const navigate = useNavigate();
+  const { value, ...filterCustomer } = customer;
 
   const onUpdateCustomer = async (customer) => {
     try {
@@ -43,25 +44,25 @@ export default function AddAssigneeModal({
   const onSubmit = async () => {
     await form.validateFields();
     const values = form.getFieldsValue();
-    const isAssignee = customer.assignee.find(
+    const isAssignee = filterCustomer.assignee.find(
       (item) => item.phone === values.phone || item.email === values.email
     );
     if (!isAssignee) {
       const payload = {
-        ...customer,
-        assignee: [...customer.assignee, { ...values }],
+        ...filterCustomer,
+        assignee: [...filterCustomer.assignee, { ...values }],
       };
       onUpdateCustomer(payload);
     }
   };
 
   const onRemove = async (item) => {
-    const dataUpdate = customer.assignee.filter(
+    const dataUpdate = filterCustomer.assignee.filter(
       (k) => k.phone !== item.phone || k.email !== item.email
     );
     if (!dataUpdate) return;
     const payload = {
-      ...customer,
+      ...filterCustomer,
       assignee: dataUpdate,
     };
     onUpdateCustomer(payload);
@@ -70,7 +71,7 @@ export default function AddAssigneeModal({
   return (
     <Modal
       {...restProps}
-      title={`Update ${customer.fullname}`}
+      title={`Update ${customer?.fullname}`}
       footer={[
         <Button type="default" onClick={closeModal}>
           Cancel
