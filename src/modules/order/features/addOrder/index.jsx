@@ -27,6 +27,7 @@ export default function AddOrder() {
 
   const onSubmit = async () => {
     try {
+      await form.validateFields();
       const values = form.getFieldsValue();
       const totalCost = calTotalCost(values);
 

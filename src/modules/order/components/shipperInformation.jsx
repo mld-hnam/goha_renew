@@ -8,6 +8,7 @@ const ShipperFormPart = ({ form }) => {
       fullName_ship: value.fullname,
       email_ship: value.email,
       address_ship: value.address,
+      customerId: value.id,
       customer: value,
     });
   };
@@ -84,6 +85,9 @@ const ShipperFormPart = ({ form }) => {
               ]}
             >
               <Input />
+            </Form.Item>
+            <Form.Item name="customerId" hidden={true}>
+              <Input type="text" />
             </Form.Item>
           </Card>
         </Col>

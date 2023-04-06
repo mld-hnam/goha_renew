@@ -1,12 +1,17 @@
 import useModal from "@/hooks/useModal";
 import AddAssigneeModal from "@/modules/customer/components/addAssigneeModal";
+import useGetCustomer from "@/modules/customer/services/useGetCustomer";
 import { SendOutlined, UserOutlined } from "@ant-design/icons";
 import { Avatar, Button, Card, Col, Form, Input, List, Row } from "antd";
 import VirtualList from "rc-virtual-list";
 
 const ConsigneeInformation = ({ form }) => {
   const { openModal, closeModal } = useModal();
-  const customer = form.getFieldValue("customer");
+  const customerId = form.getFieldValue("customerId");
+
+  const { data: customer } = useGetCustomer(customerId, {
+    enabled: Boolean(customerId),
+  });
 
   const onAssign = (item) => {
     form.setFieldsValue({

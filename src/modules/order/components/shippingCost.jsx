@@ -175,7 +175,7 @@ const ShippingCost = ({ values }) => {
                   <Row>
                     <Col span={24}>
                       {fields.map(({ key, name, ...restField }) => (
-                        <Row>
+                        <Row key={key}>
                           <Col span={18}>
                             <Form.Item
                               {...restField}

@@ -25,11 +25,11 @@ export default function BillingInformation({ data, isPrint = true }) {
     fees,
     insurance,
     totalCost,
-    address,
     packageNumber,
   } = data || {};
 
   const componentRef = useRef(null);
+
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
   });
@@ -44,11 +44,10 @@ export default function BillingInformation({ data, isPrint = true }) {
           <address>
             <p>
               <h2>
-                <span className="font-weight-semibold text-dark font-size-md">
+                <span className="font-weight-bold text-dark font-size-md">
                   Shipper Information
                 </span>
               </h2>
-              <br />
               <span>Full Name: {fullName_ship || "-"}</span>
               <br />
               <span>Phone: {phone_ship || "-"}</span>
@@ -60,11 +59,10 @@ export default function BillingInformation({ data, isPrint = true }) {
           <address>
             <p>
               <h2>
-                <span className="font-weight-semibold text-dark font-size-md">
+                <span className="font-weight-bold text-dark font-size-md">
                   Consignee Information
                 </span>
               </h2>
-              <br />
               <span>Full Name: {fullName_conSignee || "-"}</span>
               <br />
               <span>Phone: {phone_conSignee || "-"}</span>
@@ -78,14 +76,10 @@ export default function BillingInformation({ data, isPrint = true }) {
           <address>
             <p>
               <h2>
-                <span className="font-weight-semibold text-dark font-size-md">
+                <span className="font-weight-bold text-dark font-size-md">
                   Shipping Cost
                 </span>
               </h2>
-              <br />
-              <br />
-              <span>Address: {address || "-"}</span>
-              <br />
               <span>Payment By: {paymentBy || "-"}</span>
               <br />
               <span>Weight: {weight || "-"}</span>
@@ -95,32 +89,28 @@ export default function BillingInformation({ data, isPrint = true }) {
               <span>Insurance: {insurance || "-"}</span>
               <br />
               <span>
-                Other Fees:
+                <strong>Other Fees:</strong>
                 {fees?.map((item) => (
                   <div>
-                    <strong>Name:</strong>
-                    <span>{`${item?.name}: `}</span>
-                    <strong>Price:</strong>
-                    <span> {` ${item?.price} $`}</span>
+                    <span>Name:</span>
+                    <i>{`${item?.name}: `}</i>
+                    <span>Price:</span>
+                    <i> {` ${item?.price} $`}</i>
                   </div>
                 ))}
               </span>
               <br />
               <span>
-                Package Number:
+                <strong>Package Number:</strong>
                 {packageNumber?.map((item) => (
                   <>
                     <div>
-                      <span>
-                        <strong>LBS:</strong>
-                        {`${item?.lbs}: `}
-                      </span>
+                      <span>LBS:</span>
+                      <i>{`${item?.lbs}`}</i>
                     </div>
                     <div>
-                      <span>
-                        <strong>Description:</strong>
-                        {`${item?.description}: `}
-                      </span>
+                      <span>Description:</span>
+                      <i>{`${item?.description}`}</i>
                     </div>
                   </>
                 ))}
@@ -130,7 +120,7 @@ export default function BillingInformation({ data, isPrint = true }) {
           <div className="mt-3">
             <address>
               <p>
-                <span className="font-weight-semibold text-dark font-size-md">
+                <span className="font-weight-bold text-dark font-size-md">
                   <span>Total:</span>
                   <NumericFormat
                     thousandSeparator=","
